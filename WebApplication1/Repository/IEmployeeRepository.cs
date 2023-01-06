@@ -7,9 +7,11 @@ namespace WebApplication1.Repository
     public interface IEmployeeRepository
     {
         public Task<List<UserDto>> GetUsers();
-        public Task<User> GetUserById(int id);
+        public Task<UserDto> GetUserById(int id);
         public Task<int> CreateUser(User user);
 
-        public Task<User> UpdateUser(int id, User user);
+        public Task<UserDto> UpdateUser(int id, User user);
+
+        public Task<Transaction> performTransaction(int id, Transaction transaction);
     }
 }

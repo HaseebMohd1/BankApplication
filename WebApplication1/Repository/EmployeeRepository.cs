@@ -14,10 +14,15 @@ namespace WebApplication1.Repository
 
         private readonly IMapper _mapper;
 
-        public EmployeeRepository(EmployeeDbContext dbContext,  IMapper mapper)
+        private  IRepository _repository;
+
+        public EmployeeRepository(EmployeeDbContext dbContext,  IMapper mapper, IRepository repository)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _repository = repository;
+
+            
         }
 
         public async Task<List<UserDto>> GetUsers()
@@ -25,7 +30,7 @@ namespace WebApplication1.Repository
             try
             {
 
-                var res = await _dbContext.Users.ToListAsync();
+               // var res = await _dbContext.Users.ToListAsync();
 
                 var res2 = await _dbContext.Users.Select(x => _mapper.Map<UserDto>(x)).ToListAsync();
                 //res.Select(u => _mapper.Map<UserDto>(u));
@@ -40,7 +45,7 @@ namespace WebApplication1.Repository
             }
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<UserDto> GetUserById(int id)
         {
             try
             {
@@ -51,7 +56,13 @@ namespace WebApplication1.Repository
                     throw new Exception("No Such User Exists!!");
                 }
 
-                return res;
+                var res2 = _mapper.Map<UserDto>(res);
+
+                //var res2 = await _dbContext.Users.Select(x => _mapper.Map<UserDto>(x)).ToListAsync();
+
+                
+
+                return res2;
 
             }
 
@@ -65,21 +76,6 @@ namespace WebApplication1.Repository
         {
             try
             {
-               // Guid obj = new Guid();
-
-                //  var res = await _dbContext.Users.FindAsync(user.UserEmail);
-
-                //if (res != null)
-                //{
-                //  return 0;
-                // }
-
-               // var res = from u in _dbContext.Users where u.UserEmail == user.UserEmail select u;
-
-               // if(res != null)
-               // {
-                //    return 0;
-                //}
 
                 await _dbContext.Users.AddAsync(user);
 
@@ -96,13 +92,14 @@ namespace WebApplication1.Repository
             }
         }
 
-        public async Task<User> UpdateUser(int id, User user)
+        public async Task<UserDto> UpdateUser(int id, User user)
         {
             var result = await _dbContext.Users
                 .FirstOrDefaultAsync(e => e.User_Id == id);
 
+           
 
-            if(result != null)
+            if (result != null)
             {
                 result.AccountNumber = user.AccountNumber;
                 result.Role = user.Role;
@@ -117,9 +114,83 @@ namespace WebApplication1.Repository
 
                 await _dbContext.SaveChangesAsync();
 
-                return result;
+                var result2 = _mapper.Map<UserDto>(result);
+
+                return result2;
             }
             return null;
+        }
+
+
+        public Task<Transaction> performTransaction(int id, Transaction transaction)
+        {
+
+            try
+            {
+                 int userBalance = _repository.UserBalance(id);
+
+                
+
+                bool sameBank = false;
+
+                User senderDetails = _repository.GetUserById(transaction.SenderUserId);
+                User receiverDetails = _repository.GetUserById(transaction.ReceiverUserId);
+
+                int minimumRequiredBalance = senderDetails.Amount;
+
+                string senderBankCode = senderDetails.BankCode;
+                string receiverBankCode = receiverDetails.BankCode;
+
+                if (senderBankCode != null && receiverBankCode != null && senderBankCode == receiverBankCode)
+                {
+                    sameBank = true;
+                }
+
+
+                
+
+                if ( transaction.TransactionMethod !=  null && transaction.TransactionMethod.ToUpper() == "RTGS")
+                {
+                    if (sameBank)
+                    {
+                        minimumRequiredBalance = transaction.Amount;
+                    }
+                    else
+                    {
+                        minimumRequiredBalance = transaction.Amount + (5/100) * transaction.Amount;
+                    }
+                }
+
+
+                if(transaction.TransactionMethod != null && transaction.TransactionMethod.ToUpper() == "IMPS")
+                {
+                    if(sameBank)
+                    {
+                        minimumRequiredBalance = transaction.Amount + (2 / 100) * transaction.Amount;
+                    }
+                    else
+                    {
+                        minimumRequiredBalance = transaction.Amount + (6 / 100) * transaction.Amount;
+                    }
+                }
+
+                if (userBalance < minimumRequiredBalance)
+                {
+                    throw new Exception("Insufficient Amount!!");
+                }
+                
+
+                  _dbContext.Transactions.Add(transaction);
+                senderDetails.Amount = senderDetails.Amount - minimumRequiredBalance;
+                receiverDetails.Amount = receiverDetails.Amount + transaction.Amount;
+                 _dbContext.SaveChanges();
+                return Task.FromResult(transaction);
+            }
+            catch
+            {
+                throw new Exception("Transaction Failed!");
+            }
+            
         }
     }
 }

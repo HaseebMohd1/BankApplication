@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
 
         [Route("user/{id:int}")]
         [HttpGet]
-        public Task<User> GetUserById(int id)
+        public Task<UserDto> GetUserById(int id)
         {
             var userDetails = employeeRepository.GetUserById(id);
 
@@ -67,8 +67,9 @@ namespace WebApplication1.Controllers
 
         }
 
+        
         [HttpPut]
-        public async Task<User> UpdateUser(int id, User user)
+        public async Task<UserDto> UpdateUser(int id, User user)
         {
             var res = await employeeRepository.UpdateUser(id, user);
 
@@ -78,6 +79,15 @@ namespace WebApplication1.Controllers
                 return null;
             }
 
+            return res;
+        }
+
+
+        [Route("employee/transaction/{id:int}")]
+        [HttpPost]
+        public async Task<Transaction> PerformTransaction(int id, Transaction transaction)
+        {
+            var res = await employeeRepository.performTransaction(id, transaction);
             return res;
         }
        

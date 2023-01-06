@@ -9,6 +9,7 @@ namespace WebApplication1
         public ProfileMapper()
         {
             CreateMap<User, UserDto>();
+            CreateMap<Employee, EmployeeDto>();
         }
     }
 }
