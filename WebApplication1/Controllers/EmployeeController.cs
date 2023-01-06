@@ -83,13 +83,29 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Route("employee/transaction/{id:int}")]
+        [Route("transaction/{id:int}")]
         [HttpPost]
         public async Task<Transaction> PerformTransaction(int id, Transaction transaction)
         {
             var res = await employeeRepository.performTransaction(id, transaction);
             return res;
         }
+
+        [Route("revert/{transactionId:int}")]
+        [HttpGet]
+        public async Task<Transaction> RevertTransaction(int transactionId)
+        {
+            Transaction revertedTransaction = await employeeRepository.RevertTransaction(transactionId);
+
+            if(revertedTransaction == null)
+            {
+                throw new Exception("Something went wrong while perfoming Reverted Transaction");
+            }
+
+            return revertedTransaction;
+        }
+
+
        
 
 

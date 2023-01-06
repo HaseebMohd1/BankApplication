@@ -13,5 +13,10 @@ namespace WebApplication1.Repository
         public Task<UserDto> UpdateUser(int id, User user);
 
         public Task<Transaction> performTransaction(int id, Transaction transaction);
+
+
+        public Transaction GetTransactionDetails(int transactionId);
+
+        public Task<Transaction> RevertTransaction(int transactionId);
     }
 }

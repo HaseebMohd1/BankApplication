@@ -178,7 +178,9 @@ namespace WebApplication1.Repository
                 {
                     throw new Exception("Insufficient Amount!!");
                 }
-                
+
+                transaction.DepositedAccount = minimumRequiredBalance;
+                transaction.CreditedAccount = transaction.Amount;
 
                   _dbContext.Transactions.Add(transaction);
                 senderDetails.Amount = senderDetails.Amount - minimumRequiredBalance;
@@ -192,5 +194,67 @@ namespace WebApplication1.Repository
             }
             
         }
+
+
+        public Transaction GetTransactionDetails(int transactionId)
+        {
+
+            try
+            {
+                var transactionDetails = _dbContext.Transactions.Find(transactionId);
+
+                return transactionDetails;
+            }
+            catch
+            {
+                throw new Exception("Incorrect Transaction ID");
+            }
+
+
+            
+            
+        }
+
+        public Task<Transaction> RevertTransaction(int transactionId)
+        {
+            Transaction transactionDetails = this.GetTransactionDetails(transactionId);
+            try
+            {
+
+
+                if (transactionDetails == null)
+                {
+                    throw new Exception("Error : Incorrect Transaction Id");
+                }
+
+                User senderDetails = _repository.GetUserById(transactionDetails.SenderUserId);
+                User receiverDetails = _repository.GetUserById(transactionDetails.ReceiverUserId);
+
+                senderDetails.Amount = senderDetails.Amount + transactionDetails.DepositedAccount;
+                receiverDetails.Amount = receiverDetails.Amount - transactionDetails.CreditedAccount;
+
+                Transaction newTransaction = new Transaction()
+                {
+                    SenderUserId = transactionDetails.ReceiverUserId,
+                    ReceiverUserId = transactionDetails.SenderUserId,
+                    Amount = transactionDetails.Amount,
+                    TransactionMethod = transactionDetails.TransactionMethod
+                };
+
+                var revertedTransaction = this.performTransaction(transactionDetails.ReceiverUserId, newTransaction);
+
+                // _dbContext.Add()
+
+                _dbContext.SaveChanges();
+
+                return Task.FromResult(transactionDetails);
+            }
+            catch
+            {
+                throw new Exception("Error while fetching Transaction Details!!");
+            }
+
+        }
+
     }
 }
