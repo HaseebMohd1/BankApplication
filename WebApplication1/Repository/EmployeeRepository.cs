@@ -1,5 +1,6 @@
 ﻿//using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq.Expressions;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.DTO;
@@ -238,7 +239,8 @@ namespace WebApplication1.Repository
                     SenderUserId = transactionDetails.ReceiverUserId,
                     ReceiverUserId = transactionDetails.SenderUserId,
                     Amount = transactionDetails.Amount,
-                    TransactionMethod = transactionDetails.TransactionMethod
+                    TransactionMethod = transactionDetails.TransactionMethod,
+                    TransactionTime = new DateTime()
                 };
 
                 var revertedTransaction = this.performTransaction(transactionDetails.ReceiverUserId, newTransaction);
@@ -254,6 +256,21 @@ namespace WebApplication1.Repository
                 throw new Exception("Error while fetching Transaction Details!!");
             }
 
+        }
+
+        public List<Transaction> GetTransactionDetailsByUserId(int userId)
+        {
+            try
+            {
+                List<Transaction> userTransactionDetails = _repository.GetTransactionDetailsByUserId(userId);
+
+                return userTransactionDetails;
+            }
+            catch
+            {
+                throw new Exception("Error : Couldn't get User Transaction Details!!");
+            }
+            
         }
 
     }

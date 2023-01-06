@@ -56,6 +56,22 @@ namespace WebApplication1.Repository
             string userBankCode = userDetails.BankCode;
             return userBankCode;
         }
+
+
+        public List<Transaction> GetTransactionDetailsByUserId(int userId)
+        {
+            try
+            {
+                var userTransactions = _dbContext.Transactions.Where(t => t.SenderUserId == userId || t.ReceiverUserId == userId).ToList();
+
+                return userTransactions;
+            }
+            catch
+            {
+                throw new Exception("Error while fetching User Transaction Details!");
+            }
+            
+        }
     }
 }
  

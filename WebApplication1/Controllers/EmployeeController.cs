@@ -25,12 +25,12 @@ namespace WebApplication1.Controllers
 
         private IEmployeeRepository employeeRepository;
 
-        
+
 
         public EmployeeController(IEmployeeRepository employeeRepository)
         {
             this.employeeRepository = employeeRepository;
-            
+
         }
 
 
@@ -56,7 +56,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<User> CreateUser(User user)
         {
-            int res = await  employeeRepository.CreateUser(user);
+            int res = await employeeRepository.CreateUser(user);
 
             if (res == 0)
             {
@@ -67,14 +67,14 @@ namespace WebApplication1.Controllers
 
         }
 
-        
+
         [HttpPut]
         public async Task<UserDto> UpdateUser(int id, User user)
         {
             var res = await employeeRepository.UpdateUser(id, user);
 
 
-            if(res == null)
+            if (res == null)
             {
                 return null;
             }
@@ -97,12 +97,21 @@ namespace WebApplication1.Controllers
         {
             Transaction revertedTransaction = await employeeRepository.RevertTransaction(transactionId);
 
-            if(revertedTransaction == null)
+            if (revertedTransaction == null)
             {
                 throw new Exception("Something went wrong while perfoming Reverted Transaction");
             }
 
             return revertedTransaction;
+        }
+
+
+        [Route("transactionDetails/{userId:int}")]
+        [HttpGet]
+        public async Task<List<Transaction>> GetUserTransactionDetails(int userId)
+        {
+            var res = employeeRepository.GetTransactionDetailsByUserId(userId);
+            return res;
         }
 
 

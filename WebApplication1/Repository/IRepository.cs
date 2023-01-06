@@ -8,6 +8,8 @@ namespace WebApplication1.Repository
 
         public User GetUserById(int id);
         public string UserBank(int userId);
+
+        public List<Transaction> GetTransactionDetailsByUserId(int userId);
        
     }
 }
