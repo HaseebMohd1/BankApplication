@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.DTO;
 using WebApplication1.Models;
 using WebApplication1.Models.AppDbContext;
 using WebApplication1.Repository;
@@ -23,15 +25,18 @@ namespace WebApplication1.Controllers
 
         private IEmployeeRepository employeeRepository;
 
+        
+
         public EmployeeController(IEmployeeRepository employeeRepository)
         {
             this.employeeRepository = employeeRepository;
+            
         }
 
 
         [Route("users")]
         [HttpGet]
-        public Task<List<User>> GetAllUsers() {
+        public Task<List<UserDto>> GetAllUsers() {
 
             //var response = await _dbContext.Employees.ToList();
 

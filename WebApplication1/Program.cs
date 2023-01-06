@@ -18,6 +18,9 @@ builder.Services.AddDbContext<EmployeeDbContext>(options => options.UseSqlServer
 // Repository
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
+// for Automapper
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 
 
 

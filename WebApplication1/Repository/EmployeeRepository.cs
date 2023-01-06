@@ -1,6 +1,8 @@
 ﻿//using Microsoft.AspNetCore.Mvc;
 using System;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.DTO;
 using WebApplication1.Models;
 using WebApplication1.Models.AppDbContext;
 
@@ -10,21 +12,27 @@ namespace WebApplication1.Repository
     {
         private readonly EmployeeDbContext _dbContext;
 
-        public EmployeeRepository(EmployeeDbContext dbContext)
+        private readonly IMapper _mapper;
+
+        public EmployeeRepository(EmployeeDbContext dbContext,  IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public async Task<List<User>> GetUsers()
+        public async Task<List<UserDto>> GetUsers()
         {
             try
             {
 
                 var res = await _dbContext.Users.ToListAsync();
 
+                var res2 = await _dbContext.Users.Select(x => _mapper.Map<UserDto>(x)).ToListAsync();
+                //res.Select(u => _mapper.Map<UserDto>(u));
+
                 //Console.WriteLine("res -> ", res);
 
-                return res;
+                return res2;
             }
             catch (Exception ex)
             {

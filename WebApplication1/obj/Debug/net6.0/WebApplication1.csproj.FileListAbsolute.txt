@@ -90,3 +90,5 @@ C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Web.Http.dll
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
