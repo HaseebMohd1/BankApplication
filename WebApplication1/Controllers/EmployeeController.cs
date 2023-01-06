@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 using WebApplication1.Models.AppDbContext;
@@ -48,48 +49,35 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public async Task<string> CreateUser(User user)
+        public async Task<User> CreateUser(User user)
         {
-            int res = await employeeRepository.CreateUser(user);
+            int res = await  employeeRepository.CreateUser(user);
 
             if (res == 0)
             {
-                return "Error Occured While Creating User";
+                return null;
             }
 
-            return "Successfully Added User!!!!";
+            return user;
 
         }
-        
+
+        [HttpPut]
+        public async Task<User> UpdateUser(int id, User user)
+        {
+            var res = await employeeRepository.UpdateUser(id, user);
 
 
-        //[HttpGet]
-        //[Route("users")]
-        //public  IEnumerable<User> GetUsers()
-        //{
-        //    var response =  _dbContext.Users ;
-        //    return response;
-        //}
+            if(res == null)
+            {
+                return null;
+            }
+
+            return res;
+        }
+       
 
 
-        //[HttpPost]
-        //[Route("user")]
-        //public JsonContent CreateUser(User userDetails)
-        //{
-        //    _dbContext.Users.Add(new User()
-        //    {
-        //        UserName = userDetails.UserName,
-        //        UserEmail = userDetails.UserEmail,
-        //        UserPassword = userDetails.UserPassword,
-        //        UserPhone = userDetails.UserPhone,
-        //        BankCode = userDetails.BankCode,
-        //        BankName = userDetails.BankName,
-        //        AccountNumber = userDetails.AccountNumber,
-
-        //    });
-        //    var abcd =
-        //    return abcd;
-        //}
 
 
     }
