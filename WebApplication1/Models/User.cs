@@ -22,6 +22,8 @@ namespace WebApplication1.Models
         public string? AccountNumber { get; set; }
 
         public int Amount { get; set; }
-        public string? Role { get; set; }
+        public string? Role { get; set; } = "user";
+
+        public int IsActive { get; set; } = 1;
     }
 }

@@ -115,6 +115,14 @@ namespace WebApplication1.Controllers
         }
 
 
+        [HttpPut("user/delete/{userId:int}")]
+        public async Task<string> DeleteUser(int userId)
+        {
+            var res = employeeRepository?.DeleteUserById(userId);
+            return res;
+        }
+
+
        
 
 

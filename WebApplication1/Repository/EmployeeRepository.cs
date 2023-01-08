@@ -273,5 +273,33 @@ namespace WebApplication1.Repository
             
         }
 
+
+        public string DeleteUserById(int id)
+        {
+            try
+            {
+                var userDetails = _dbContext.Users.Find(id);
+
+                if (userDetails == null || userDetails?.IsActive==0)
+                {
+                    return "User Not Found!!!";
+                }
+
+                string? accountNumber = userDetails?.AccountNumber;
+                string? userAccountNumber = accountNumber;
+
+                userDetails.IsActive = 0;
+
+                _dbContext.SaveChanges();
+
+                return "User Removed Successfully -> Acc No : "+userAccountNumber;
+            }
+            catch
+            {
+                throw new Exception("Error Occured while deleting the User");
+            }
+            
+        }
+
     }
 }

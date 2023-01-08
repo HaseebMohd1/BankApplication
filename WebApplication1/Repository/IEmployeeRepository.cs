@@ -20,5 +20,7 @@ namespace WebApplication1.Repository
         public Task<Transaction> RevertTransaction(int transactionId);
 
         public List<Transaction> GetTransactionDetailsByUserId(int userId);
+
+        public string DeleteUserById(int id);
     }
 }
