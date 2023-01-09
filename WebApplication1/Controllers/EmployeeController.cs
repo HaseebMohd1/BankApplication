@@ -50,11 +50,13 @@ namespace WebApplication1.Controllers
 
         [Route("user/{id:int}")]
         [HttpGet]
-        public Task<UserDto> GetUserById(int id)
+        public UserDto GetUserById(int id)
         {
-            var userDetails = employeeRepository.GetUserById(id);
+            //var userDetails = employeeRepository.GetUserById(id);
 
-            return userDetails;
+            var userDetails2 = _employeeService.GetUserById(id);
+
+            return userDetails2;
         }
 
         [HttpPost]

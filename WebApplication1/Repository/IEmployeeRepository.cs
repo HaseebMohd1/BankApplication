@@ -8,6 +8,8 @@ namespace WebApplication1.Repository
     {
         public Task<List<UserDto>> GetUsers();
         public Task<UserDto> GetUserById(int id);
+
+        public User GetUserDetails(int userId);
         public Task<int> CreateUser(User user);
 
         public Task<UserDto> UpdateUser(int id, User user);

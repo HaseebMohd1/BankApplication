@@ -33,7 +33,7 @@ namespace WebApplication1.Repository
 
                // var res = await _dbContext.Users.ToListAsync();
 
-                var res2 = await _dbContext.Users.Select(x => _mapper.Map<UserDto>(x)).ToListAsync();
+               // var res2 = await _dbContext.Users.Select(x => _mapper.Map<UserDto>(x)).ToListAsync();
 
                 var res3 = await _dbContext.Users.Where(u => u.IsActive == 1).Select(x => _mapper.Map<UserDto>(x)).ToListAsync();
 
@@ -47,6 +47,15 @@ namespace WebApplication1.Repository
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+
+
+        public User GetUserDetails(int userId)
+        {
+            var userDetails = _dbContext.Users.Find(userId);
+
+            return userDetails;
         }
 
         public async Task<UserDto> GetUserById(int id)
