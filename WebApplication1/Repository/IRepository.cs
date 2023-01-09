@@ -10,6 +10,8 @@ namespace WebApplication1.Repository
         public string UserBank(int userId);
 
         public List<Transaction> GetTransactionDetailsByUserId(int userId);
+
+        public bool IsValidUser(int userId);
        
     }
 }

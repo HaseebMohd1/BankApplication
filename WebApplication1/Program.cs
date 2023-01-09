@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models.AppDbContext;
 using WebApplication1.Repository;
+using WebApplication1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,12 @@ builder.Services.AddDbContext<EmployeeDbContext>(options => options.UseSqlServer
 // Repository
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+
+
+
+// Registering Services
+builder.Services.AddScoped<ITransactionService, TransactionService>();
 
 // for Automapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);

@@ -72,6 +72,24 @@ namespace WebApplication1.Repository
             }
             
         }
+
+        public bool IsValidUser(int userId)
+        {
+            try
+            {
+                var userDetails = this.GetUserById(userId);
+                if(userDetails != null && userDetails.IsActive == 1)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                throw new Exception("Error while validating a User!!");
+            }
+            
+        }
     }
 }
  
