@@ -39,14 +39,20 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("deposit")]
-        public string DepositAmount(int amount, int userId)
+        public string DepositAmount(int amount, int userId, string currency)
         {
 
-            string response = _userService.DepositAmount(amount, userId);
+            string response = _userService.DepositAmount(amount, userId, currency);
 
             return response;
         }
 
+        [HttpPost("transfer")]
+        public Task<Transaction> TransferAmount(Transaction transaction)
+        {
+            var response = _userService.TransferAmount(transaction);
+            return response;
+        }
 
     }
 }

@@ -9,10 +9,13 @@ namespace WebApplication1.Services
 
         private readonly ITransactionRepository _transactionRepository;
         private readonly IRepository _repository;
-        public UserService(ITransactionRepository transactionRepository, IRepository repository)
+        private readonly IEmployeeRepository _employeeRepository;
+
+        public UserService(ITransactionRepository transactionRepository, IRepository repository, IEmployeeRepository employeeRepository)
         {
             _transactionRepository = transactionRepository;
             _repository = repository;
+            _employeeRepository = employeeRepository;
         }
 
         private bool CheckIfSufficientBalance(int amount, int userId)
@@ -67,11 +70,19 @@ namespace WebApplication1.Services
 
 
 
-        public string DepositAmount(int amount, int userId)
+        public string DepositAmount(int amount, int userId, string currency)
         {
             var userDetails = _repository.GetUserById(userId);
 
-            userDetails.Amount += amount;
+            if(currency.ToUpper() != "INR")
+            {
+                userDetails.Amount += amount * 90;
+            }
+            else
+            {
+                userDetails.Amount = amount;
+            }
+            //userDetails.Amount += amount;
 
 
             Transaction newTransaction = new Transaction
@@ -84,6 +95,8 @@ namespace WebApplication1.Services
                 CreditedAccount = amount,
                 DepositedAccount = -1,
                 TransactionTime = DateTime.UtcNow,
+                TransactionCurrency = currency
+                
             };
 
             bool isTransactionSuccessfull = _transactionRepository.NewTransaction(newTransaction);
@@ -99,5 +112,18 @@ namespace WebApplication1.Services
         }
 
 
+
+        public Task<Transaction> TransferAmount(Transaction transaction)
+        {
+
+            var userId = transaction.SenderUserId;
+
+            var res =  _employeeRepository.performTransaction(userId, transaction);
+
+
+            return res;
+        }
+
+        
     }
 }
