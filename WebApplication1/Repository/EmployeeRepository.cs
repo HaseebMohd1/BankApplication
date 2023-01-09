@@ -34,11 +34,14 @@ namespace WebApplication1.Repository
                // var res = await _dbContext.Users.ToListAsync();
 
                 var res2 = await _dbContext.Users.Select(x => _mapper.Map<UserDto>(x)).ToListAsync();
+
+                var res3 = await _dbContext.Users.Where(u => u.IsActive == 1).Select(x => _mapper.Map<UserDto>(x)).ToListAsync();
+
                 //res.Select(u => _mapper.Map<UserDto>(u));
 
                 //Console.WriteLine("res -> ", res);
 
-                return res2;
+                return res3;
             }
             catch (Exception ex)
             {

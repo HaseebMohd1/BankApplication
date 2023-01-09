@@ -6,6 +6,7 @@ using WebApplication1.DTO;
 using WebApplication1.Models;
 using WebApplication1.Models.AppDbContext;
 using WebApplication1.Repository;
+using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
 {
@@ -25,12 +26,12 @@ namespace WebApplication1.Controllers
 
         private IEmployeeRepository employeeRepository;
 
+        private readonly IEmployeeService _employeeService;
 
-
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        public EmployeeController(IEmployeeRepository employeeRepository, IEmployeeService employeeService)
         {
             this.employeeRepository = employeeRepository;
-
+            _employeeService = employeeService;
         }
 
 
@@ -40,7 +41,10 @@ namespace WebApplication1.Controllers
 
             //var response = await _dbContext.Employees.ToList();
 
-            var response = employeeRepository.GetUsers();
+            //var response = employeeRepository.GetUsers();
+
+            var response = _employeeService.GetUsers();
+
             return response;
         }
 
