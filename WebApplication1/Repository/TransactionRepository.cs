@@ -26,6 +26,19 @@ namespace WebApplication1.Repository
             
         }
 
-  
+        public int GetCurrencyConversionValue(string currencyCode)
+        {
+
+            var currecnyDetails = _dbContext.Currencies.Find(currencyCode);
+
+            if(currecnyDetails == null)
+            {
+                return 0;
+            }
+
+            return currecnyDetails.ConversionValue;
+        }
+
+
     }
 }

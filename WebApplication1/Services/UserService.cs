@@ -74,9 +74,10 @@ namespace WebApplication1.Services
         {
             var userDetails = _repository.GetUserById(userId);
 
+            int currencyConverterValue = _transactionRepository.GetCurrencyConversionValue(currency);
             if(currency.ToUpper() != "INR")
             {
-                userDetails.Amount += amount * 90;
+                userDetails.Amount += amount * currencyConverterValue;
             }
             else
             {

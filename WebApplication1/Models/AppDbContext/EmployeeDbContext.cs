@@ -13,5 +13,7 @@ namespace WebApplication1.Models.AppDbContext
         public DbSet<Employee> Employees { get; set;}
         public DbSet<User> Users { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+
+        public DbSet<Currency> Currencies { get; set; }
     }
 }
