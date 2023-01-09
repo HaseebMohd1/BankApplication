@@ -128,9 +128,9 @@ namespace WebApplication1.Repository
 
             try
             {
-                 int userBalance = _repository.UserBalance(id);
+                int userBalance = _repository.UserBalance(id);
 
-                
+                double serviceCharge = 0;
 
                 bool sameBank = false;
 
@@ -139,8 +139,10 @@ namespace WebApplication1.Repository
 
                 int minimumRequiredBalance = senderDetails.Amount;
 
-                string senderBankCode = senderDetails.BankCode;
-                string receiverBankCode = receiverDetails.BankCode;
+                string senderBankCode = senderDetails?.BankCode;
+                string receiverBankCode = receiverDetails?.BankCode;
+
+              
 
                 if (senderBankCode != null && receiverBankCode != null && senderBankCode == receiverBankCode)
                 {
@@ -155,10 +157,12 @@ namespace WebApplication1.Repository
                     if (sameBank)
                     {
                         minimumRequiredBalance = transaction.Amount;
+                        serviceCharge = 0;
                     }
                     else
                     {
-                        minimumRequiredBalance = transaction.Amount + (5/100) * transaction.Amount;
+                        minimumRequiredBalance = transaction.Amount + (5 / 100) * transaction.Amount;
+                        serviceCharge = (double)5 / 100 * (transaction.Amount);
                     }
                 }
 
@@ -168,11 +172,13 @@ namespace WebApplication1.Repository
                     if(sameBank)
                     {
                         minimumRequiredBalance = transaction.Amount + (2 / 100) * transaction.Amount;
-                    }
+                            serviceCharge = (double)2 / 100 * (transaction.Amount);
+                        }
                     else
                     {
                         minimumRequiredBalance = transaction.Amount + (6 / 100) * transaction.Amount;
-                    }
+                            serviceCharge = (double)6 / 100 * (transaction.Amount);
+                        }
                 }
 
                 if (userBalance < minimumRequiredBalance)
@@ -183,12 +189,14 @@ namespace WebApplication1.Repository
                 transaction.DepositedAccount = minimumRequiredBalance;
                 transaction.CreditedAccount = transaction.Amount;
 
+                transaction.ServiceCharge = serviceCharge;
+
                   _dbContext.Transactions.Add(transaction);
                 senderDetails.Amount = senderDetails.Amount - minimumRequiredBalance;
                 receiverDetails.Amount = receiverDetails.Amount + transaction.Amount;
                  _dbContext.SaveChanges();
                 return Task.FromResult(transaction);
-            }
+                }
             catch
             {
                 throw new Exception("Transaction Failed!");

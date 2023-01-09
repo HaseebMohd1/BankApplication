@@ -4,6 +4,8 @@ namespace WebApplication1.Models
 {
     public class Transaction
     {
+        private double serviceCharge;
+
         [Key]
         public int TransactionId { get; set; }
 
@@ -18,6 +20,10 @@ namespace WebApplication1.Models
 
         public int DepositedAccount { get; set; }
         public int CreditedAccount { get; set; }
+
+        public double ServiceCharge { get => serviceCharge; set => serviceCharge = value; }
+
+        public string TransactionCurrency { get; set; } = "INR";
 
 
 
