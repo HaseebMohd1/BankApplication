@@ -137,7 +137,7 @@ namespace WebApplication1.Repository
                 User senderDetails = _repository.GetUserById(transaction.SenderUserId);
                 User receiverDetails = _repository.GetUserById(transaction.ReceiverUserId);
 
-                int minimumRequiredBalance = senderDetails.Amount;
+                int minimumRequiredBalance = transaction.Amount;
 
                 string senderBankCode = senderDetails?.BankCode;
                 string receiverBankCode = receiverDetails?.BankCode;

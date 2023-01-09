@@ -10,12 +10,16 @@ namespace WebApplication1.Controllers
     public class UserController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
-        public UserController(ITransactionService transactionService)
+
+        private IUserService _userService;
+
+        public UserController(ITransactionService transactionService, IUserService userService)
         {
             _transactionService = transactionService;
+            _userService = userService;
         }
 
-        
+       
 
         [HttpGet("transactions/{userId:int}")]
         public  List<Transaction> GetTransactionHistory(int userId)
@@ -24,5 +28,25 @@ namespace WebApplication1.Controllers
            
             return res;
         }
+
+        [HttpPost("withdrawal/{userId:int}")]
+        public string WithdrawAmount(int amount, int userId)
+        {
+
+            string response =  _userService.WithdrawAmount(amount, userId);
+
+            return response;
+        }
+
+        [HttpPost("deposit")]
+        public string DepositAmount(int amount, int userId)
+        {
+
+            string response = _userService.DepositAmount(amount, userId);
+
+            return response;
+        }
+
+
     }
 }

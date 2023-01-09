@@ -20,11 +20,13 @@ builder.Services.AddDbContext<EmployeeDbContext>(options => options.UseSqlServer
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 
 // Registering Services
 builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // for Automapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
