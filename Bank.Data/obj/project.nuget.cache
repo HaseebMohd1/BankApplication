@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "UZIaexoNMbz5miBx5YZp3q316vEMSwi4JfK9JTYg+pZVvWJGefH9xAI8yDLgXaWx7QptZ47GIl6tCd4qPz2nkw==",
+  "dgSpecHash": "6gUFqJs91u8OkqyQWsIonbSbx+jAAsQGirfTYWAOAaXnFedmOeseLYQQw1HDduUiyYeuAl8idmx4RSrieQJxSA==",
   "success": true,
   "projectFilePath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Data\\Bank.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\haseeb.m\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\haseeb.m\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\haseeb.m\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\haseeb.m\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\haseeb.m\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\haseeb.m\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\haseeb.m\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",

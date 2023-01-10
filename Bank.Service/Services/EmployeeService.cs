@@ -1,8 +1,10 @@
 ﻿using System.Security.Cryptography;
+using System.Text;
 using AutoMapper;
 using Bank.Models;
 using WebApplication1.DTO;
 using WebApplication1.Repository;
+using BCrypt.Net;
 
 namespace WebApplication1.Services
 {
@@ -11,6 +13,8 @@ namespace WebApplication1.Services
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMapper _mapper;
         private readonly IRepository _repository;
+
+
 
         public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper, IRepository repository)
         {
@@ -84,8 +88,16 @@ namespace WebApplication1.Services
 
 
             // password hashing 
-            CreatePasswordHash(userDetails.UserPassword, out byte[] passwordSalt, out string passwordHash);
-            userDetails.UserPassword = passwordHash;
+            //CreatePasswordHash(userDetails.UserPassword, out byte[] passwordSalt, out string passwordHash);
+            //userDetails.UserPassword = passwordHash;
+
+            //string hashedPassword = CreatePasswordHash2(userDetails.UserPassword);
+
+            string hashedPassword = CreatePasswordHashUsingBcrypt(userDetails.UserPassword);
+
+
+
+            userDetails.UserPassword = hashedPassword;
 
             var res = _employeeRepository.CreateUser(userDetails);
 
@@ -111,11 +123,54 @@ namespace WebApplication1.Services
 
         private void CreatePasswordHash(string password, out byte[] passwordSalt, out string passwordHash)
         {
+            byte[] key = new byte[32];
+
             using (var hmac = new HMACSHA512())
             {
-                passwordSalt = hmac.Key;
+                passwordSalt = key;
                 passwordHash = Convert.ToBase64String(hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)));
             }
+
+
+            
+
+            
+
+        }
+
+
+        private string CreatePasswordHash2(string password)
+        {
+            StringBuilder hash = new StringBuilder();
+
+            // input string
+            string input = password;
+
+            // defining MD5 object
+            var md5provider = new MD5CryptoServiceProvider();
+            // computing MD5 hash
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+
+            // final output
+            // Console.WriteLine(string.Format("The MD5 hash is: {0}", hash));
+
+            return hash.ToString();
+        }
+
+        private string CreatePasswordHashUsingBcrypt(string password)
+        {
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+
+            return hashedPassword;
+        }
+
+        private bool VerifyPasswordBcrypt(string password)
+        {
+            return true;
         }
 
 

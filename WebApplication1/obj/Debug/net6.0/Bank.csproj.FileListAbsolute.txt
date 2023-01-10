@@ -98,3 +98,4 @@ C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\obj\Debug\net6.0\
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\obj\Debug\net6.0\Bank.pdb
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\obj\Debug\net6.0\Bank.genruntimeconfig.cache
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\obj\Debug\net6.0\ref\Bank.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\BCrypt.Net-Next.dll

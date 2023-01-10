@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "VLAHoC/Xh1VtGDEMnOMa/J8YjjdYou4GA5IxjF50YDiOn7iC4xkNu9bLx2A0D7b/IZdxbOdNLZvFRGVWL4Nt5g==",
+  "dgSpecHash": "fv/iY9+7wKowO1HzbDSe7KNuLEcL+nlOssn2IN04O8kZ0qJF1zB27ALjGTtwrf0Ar+8mvMDKH3uYiTKJI42HRg==",
   "success": true,
   "projectFilePath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Models\\Bank.Models.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\haseeb.m\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
