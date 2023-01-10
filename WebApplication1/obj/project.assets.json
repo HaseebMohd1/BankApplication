@@ -2656,6 +2656,19 @@
         "runtime": {
           "bin/placeholder/Bank.Models.dll": {}
         }
+      },
+      "Bank.Service/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Bank.Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Bank.Service.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Bank.Service.dll": {}
+        }
       }
     }
   },
@@ -8285,6 +8298,11 @@
       "type": "project",
       "path": "../Bank.Models/Bank.Models.csproj",
       "msbuildProject": "../Bank.Models/Bank.Models.csproj"
+    },
+    "Bank.Service/1.0.0": {
+      "type": "project",
+      "path": "../Bank.Service/Bank.Service.csproj",
+      "msbuildProject": "../Bank.Service/Bank.Service.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -8292,6 +8310,7 @@
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.0",
       "Bank.Data >= 1.0.0",
       "Bank.Models >= 1.0.0",
+      "Bank.Service >= 1.0.0",
       "Microsoft.AspNet.WebApi.Core >= 5.2.9",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.9",
       "Microsoft.EntityFrameworkCore >= 7.0.1",
@@ -8332,6 +8351,9 @@
             },
             "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Models\\Bank.Models.csproj": {
               "projectPath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Models\\Bank.Models.csproj"
+            },
+            "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Service\\Bank.Service.csproj": {
+              "projectPath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Service\\Bank.Service.csproj"
             }
           }
         }

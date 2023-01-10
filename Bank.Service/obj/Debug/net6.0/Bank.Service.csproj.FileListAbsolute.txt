@@ -1,0 +1,17 @@
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\bin\Debug\net6.0\Bank.Service.deps.json
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\bin\Debug\net6.0\Bank.Service.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\bin\Debug\net6.0\Bank.Service.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\bin\Debug\net6.0\Bank.Data.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\bin\Debug\net6.0\Bank.Models.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\bin\Debug\net6.0\Bank.Data.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\bin\Debug\net6.0\Bank.Models.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\obj\Debug\net6.0\Bank.Service.csproj.AssemblyReference.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\obj\Debug\net6.0\Bank.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\obj\Debug\net6.0\Bank.Service.AssemblyInfoInputs.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\obj\Debug\net6.0\Bank.Service.AssemblyInfo.cs
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\obj\Debug\net6.0\Bank.Service.csproj.CoreCompileInputs.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\obj\Debug\net6.0\Bank.Service.csproj.CopyComplete
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\obj\Debug\net6.0\Bank.Service.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\obj\Debug\net6.0\refint\Bank.Service.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\obj\Debug\net6.0\Bank.Service.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Service\obj\Debug\net6.0\ref\Bank.Service.dll
