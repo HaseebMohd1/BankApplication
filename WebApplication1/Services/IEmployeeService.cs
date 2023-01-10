@@ -1,4 +1,5 @@
-﻿using WebApplication1.DTO;
+﻿using Bank.Models;
+using WebApplication1.DTO;
 
 namespace WebApplication1.Services
 {

@@ -8,11 +8,13 @@ namespace WebApplication1.Services
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMapper _mapper;
+        private readonly IRepository _repository;
 
-        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper)
+        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper, IRepository repository)
         {
             _employeeRepository = employeeRepository;
             _mapper = mapper;
+            _repository = repository;
         }
 
 
@@ -67,5 +69,8 @@ namespace WebApplication1.Services
 
             return true;
         }
+
+
+        
     }
 }

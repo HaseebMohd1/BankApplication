@@ -154,7 +154,7 @@ namespace WebApplication1.Repository
                 string senderBankCode = senderDetails?.BankCode;
                 string receiverBankCode = receiverDetails?.BankCode;
 
-              
+
 
                 if (senderBankCode != null && receiverBankCode != null && senderBankCode == receiverBankCode)
                 {
@@ -162,9 +162,9 @@ namespace WebApplication1.Repository
                 }
 
 
-                
 
-                if ( transaction.TransactionMethod !=  null && transaction.TransactionMethod.ToUpper() == "RTGS")
+
+                if (transaction.TransactionMethod != null && transaction.TransactionMethod.ToUpper() == "RTGS")
                 {
                     if (sameBank)
                     {
@@ -179,18 +179,18 @@ namespace WebApplication1.Repository
                 }
 
 
-                if(transaction.TransactionMethod != null && transaction.TransactionMethod.ToUpper() == "IMPS")
+                if (transaction.TransactionMethod != null && transaction.TransactionMethod.ToUpper() == "IMPS")
                 {
-                    if(sameBank)
+                    if (sameBank)
                     {
                         minimumRequiredBalance = transaction.Amount + (2 / 100) * transaction.Amount;
-                            serviceCharge = (double)2 / 100 * (transaction.Amount);
-                        }
+                        serviceCharge = (double)2 / 100 * (transaction.Amount);
+                    }
                     else
                     {
                         minimumRequiredBalance = transaction.Amount + (6 / 100) * transaction.Amount;
-                            serviceCharge = (double)6 / 100 * (transaction.Amount);
-                        }
+                        serviceCharge = (double)6 / 100 * (transaction.Amount);
+                    }
                 }
 
                 if (userBalance < minimumRequiredBalance)
@@ -203,7 +203,11 @@ namespace WebApplication1.Repository
 
                 transaction.ServiceCharge = serviceCharge;
 
-                  _dbContext.Transactions.Add(transaction);
+
+
+
+
+                _dbContext.Transactions.Add(transaction);
                 senderDetails.Amount = senderDetails.Amount - minimumRequiredBalance;
                 receiverDetails.Amount = receiverDetails.Amount + transaction.Amount;
                  _dbContext.SaveChanges();
@@ -275,6 +279,7 @@ namespace WebApplication1.Repository
             {
                 throw new Exception("Error while fetching Transaction Details!!");
             }
+
 
         }
 
