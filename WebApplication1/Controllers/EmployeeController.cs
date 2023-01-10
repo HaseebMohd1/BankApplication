@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DTO;
 using WebApplication1.Repository;
 using WebApplication1.Services;
-using Bank.Models;
 
 
 namespace WebApplication1.Controllers
@@ -126,12 +125,6 @@ namespace WebApplication1.Controllers
             var res = employeeRepository?.DeleteUserById(userId);
             return res;
         }
-
-
-
-
-
-
 
     }
 }

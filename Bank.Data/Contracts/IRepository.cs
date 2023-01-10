@@ -12,6 +12,9 @@ namespace WebApplication1.Repository
         public List<Transaction> GetTransactionDetailsByUserId(int userId);
 
         public bool IsValidUser(int userId);
-       
+
+        public User GetUserByEmail(string userEmail);
+
+
     }
 }

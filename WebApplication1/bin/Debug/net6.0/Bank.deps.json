@@ -1524,7 +1524,9 @@
         "dependencies": {
           "AutoMapper": "12.0.0",
           "Bank.Models": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "7.0.1"
+          "Microsoft.EntityFrameworkCore": "7.0.1",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.1",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.1"
         },
         "runtime": {
           "Bank.Data.dll": {}

@@ -89,5 +89,14 @@ namespace WebApplication1.Repository
             }
 
         }
+
+
+
+        public User GetUserByEmail(string userEmail)
+        {
+            User userDetails = _dbContext.Users.Where(u => u.UserEmail.ToLower() == userEmail.ToLower()).FirstOrDefault();
+
+            return userDetails;
+        }
     }
 }

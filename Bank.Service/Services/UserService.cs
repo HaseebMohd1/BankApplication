@@ -1,4 +1,5 @@
 ﻿using Bank.Models;
+using WebApplication1.DTO;
 using WebApplication1.Repository;
 
 namespace WebApplication1.Services
@@ -125,6 +126,25 @@ namespace WebApplication1.Services
             return res;
         }
 
-        
+        public string UserLogin(string userEmail, string userPassword)
+        {
+
+            User userDetails = _repository.GetUserByEmail(userEmail);
+
+            if(userDetails == null)
+            {
+                throw new Exception("User with Email doesn't exists!!! Please enter valid/existing User Email");
+            }
+
+            if(userPassword != userDetails.UserPassword)
+            {
+                throw new Exception("Entered Details are Incorrect. Please Enter valid Email & Password");
+            }
+
+            return "Login";
+        }
+
+
+
     }
 }

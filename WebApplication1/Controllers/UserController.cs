@@ -1,6 +1,7 @@
 ﻿using Bank.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.DTO;
 using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
@@ -13,19 +14,20 @@ namespace WebApplication1.Controllers
 
         private IUserService _userService;
 
+
         public UserController(ITransactionService transactionService, IUserService userService)
         {
             _transactionService = transactionService;
             _userService = userService;
         }
 
-       
+
 
         [HttpGet("transactions/{userId:int}")]
-        public  List<Transaction> GetTransactionHistory(int userId)
+        public List<Transaction> GetTransactionHistory(int userId)
         {
-            var res =  _transactionService.GetTransactionHistoryByUserId(userId);
-           
+            var res = _transactionService.GetTransactionHistoryByUserId(userId);
+
             return res;
         }
 
@@ -33,7 +35,7 @@ namespace WebApplication1.Controllers
         public string WithdrawAmount(int amount, int userId)
         {
 
-            string response =  _userService.WithdrawAmount(amount, userId);
+            string response = _userService.WithdrawAmount(amount, userId);
 
             return response;
         }
@@ -52,6 +54,31 @@ namespace WebApplication1.Controllers
         {
             var response = _userService.TransferAmount(transaction);
             return response;
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<string>> Login(string userEmail, string userPassword)
+        {
+            //if (user.UserName != userDetails.UserName)
+            //{
+            //    return BadRequest("User Not Found");
+            //}
+
+            //if (!VerifyPassword(userDetails.Password, user.PasswordSalt, user.PasswordHash))
+            //{
+            //    return BadRequest("Incorrect Credentials!!!");
+            //}
+
+            //string token = CreateToken(user);
+
+            var res = _userService.UserLogin(userEmail, userPassword);
+
+            if(res != "Login")
+            {
+                return BadRequest("Login Failed");
+            }
+
+            return Ok("Login Successfull!!! => Token : ");
         }
 
     }

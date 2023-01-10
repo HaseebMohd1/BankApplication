@@ -1,4 +1,5 @@
 ﻿using Bank.Models;
+using WebApplication1.DTO;
 
 namespace WebApplication1.Services
 {
@@ -10,5 +11,7 @@ namespace WebApplication1.Services
 
         public Task<Transaction> TransferAmount(Transaction transaction);
 
+        public string UserLogin(string userName, string userPassword);
+       
     }
 }

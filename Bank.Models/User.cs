@@ -15,6 +15,10 @@ namespace Bank.Models
 
         public string? UserPassword { get; set;}
 
+       // public string PasswordHash { get; set; } = string.Empty;
+
+     //   public string PasswordSalt { get; set; } = string.Empty;
+
         public string? BankCode { get; set; }
 
         public string? BankName { get; set;}
