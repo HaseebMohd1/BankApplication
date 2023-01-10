@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using WebApplication1.DTO;
+﻿using WebApplication1.DTO;
 using Bank.Models;
 
 namespace WebApplication1.Repository
