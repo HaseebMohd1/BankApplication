@@ -10,5 +10,7 @@ namespace WebApplication1.Services
         public bool isUserActive(int userId);
 
         public UserDto GetUserById(int userId);
+
+        public UserDto CreateUser(User userDetails);
     }
 }

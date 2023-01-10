@@ -58,16 +58,20 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public async Task<User> CreateUser(User user)
+        public async Task<UserDto> CreateUser(User user)
         {
-            int res = await employeeRepository.CreateUser(user);
+           // int res = await employeeRepository.CreateUser(user);
 
-            if (res == 0)
-            {
-                return null;
-            }
+            UserDto newUserDetails = _employeeService.CreateUser(user);
 
-            return user;
+            //if (res == 0)
+            //{
+            //    return null;
+            //}
+
+            return newUserDetails;
+
+          // return user;
 
         }
 

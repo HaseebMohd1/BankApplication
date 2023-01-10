@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Security.Cryptography;
+using AutoMapper;
+using Bank.Models;
 using WebApplication1.DTO;
 using WebApplication1.Repository;
 
@@ -71,6 +73,51 @@ namespace WebApplication1.Services
         }
 
 
-        
+        public UserDto CreateUser(User userDetails)
+        {
+            var user = _repository.GetUserByEmail(userDetails.UserEmail);
+
+            if(user != null )
+            {
+                throw new Exception("User already exists with this Email. Please try with other Email.");
+            }
+
+
+            // password hashing 
+            CreatePasswordHash(userDetails.UserPassword, out byte[] passwordSalt, out string passwordHash);
+            userDetails.UserPassword = passwordHash;
+
+            var res = _employeeRepository.CreateUser(userDetails);
+
+            if (res == Task.FromResult(0))
+            {
+                throw new Exception("User Registration Failed. Please try again!!");
+            }
+
+            var newUser = new UserDto
+            {
+                UserName = userDetails.UserName,
+                UserEmail = userDetails.UserEmail,
+                UserPhone = userDetails.UserPhone,
+                BankCode = userDetails.BankCode,
+                BankName = userDetails.BankName,
+                AccountNumber = userDetails.AccountNumber
+            };
+
+            return newUser;
+
+        }
+
+
+        private void CreatePasswordHash(string password, out byte[] passwordSalt, out string passwordHash)
+        {
+            using (var hmac = new HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = Convert.ToBase64String(hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)));
+            }
+        }
+
+
     }
 }
