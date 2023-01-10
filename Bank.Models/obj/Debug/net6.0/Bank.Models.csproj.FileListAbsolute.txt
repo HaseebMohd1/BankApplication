@@ -1,0 +1,12 @@
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\bin\Debug\net6.0\Bank.Models.deps.json
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\bin\Debug\net6.0\Bank.Models.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\bin\Debug\net6.0\Bank.Models.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\obj\Debug\net6.0\Bank.Models.csproj.AssemblyReference.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\obj\Debug\net6.0\Bank.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\obj\Debug\net6.0\Bank.Models.AssemblyInfoInputs.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\obj\Debug\net6.0\Bank.Models.AssemblyInfo.cs
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\obj\Debug\net6.0\Bank.Models.csproj.CoreCompileInputs.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\obj\Debug\net6.0\Bank.Models.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\obj\Debug\net6.0\refint\Bank.Models.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\obj\Debug\net6.0\Bank.Models.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Models\obj\Debug\net6.0\ref\Bank.Models.dll

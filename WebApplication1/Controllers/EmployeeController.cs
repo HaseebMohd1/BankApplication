@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+﻿using Bank.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DTO;
-using WebApplication1.Models;
-using WebApplication1.Models.AppDbContext;
 using WebApplication1.Repository;
 using WebApplication1.Services;
+using Bank.Models;
+
 
 namespace WebApplication1.Controllers
 {
@@ -37,7 +35,8 @@ namespace WebApplication1.Controllers
 
         [Route("users")]
         [HttpGet]
-        public Task<List<UserDto>> GetAllUsers() {
+        public Task<List<UserDto>> GetAllUsers()
+        {
 
             //var response = await _dbContext.Employees.ToList();
 
@@ -129,7 +128,7 @@ namespace WebApplication1.Controllers
         }
 
 
-       
+
 
 
 

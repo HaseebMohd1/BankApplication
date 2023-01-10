@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using WebApplication1.DTO;
-using WebApplication1.Models;
+using Bank.Models;
 
 namespace WebApplication1
 {

@@ -2,6 +2,7 @@
 using System;
 using System.Linq.Expressions;
 using AutoMapper;
+using Bank.Models;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.DTO;
 using WebApplication1.Models;

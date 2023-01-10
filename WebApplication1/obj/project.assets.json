@@ -2631,6 +2631,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
+      },
+      "Bank.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Bank.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Bank.Models.dll": {}
+        }
       }
     }
   },
@@ -8250,11 +8260,17 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
+    },
+    "Bank.Models/1.0.0": {
+      "type": "project",
+      "path": "../Bank.Models/Bank.Models.csproj",
+      "msbuildProject": "../Bank.Models/Bank.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.0",
+      "Bank.Models >= 1.0.0",
       "Microsoft.AspNet.WebApi.Core >= 5.2.9",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.9",
       "Microsoft.EntityFrameworkCore >= 7.0.1",
@@ -8269,9 +8285,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
-      "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\WebApplication1\\Bank.csproj",
+      "projectName": "Bank",
+      "projectPath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\WebApplication1\\Bank.csproj",
       "packagesPath": "C:\\Users\\haseeb.m\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
@@ -8289,7 +8305,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Models\\Bank.Models.csproj": {
+              "projectPath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Models\\Bank.Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

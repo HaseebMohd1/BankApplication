@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Bank.Models;
 
 
 namespace WebApplication1.Models.AppDbContext

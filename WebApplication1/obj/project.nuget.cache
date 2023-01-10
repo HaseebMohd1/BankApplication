@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mpybeoc99E/gdU3DJ4f5ne7iEoHHeOJNE5wjvvuohmzJs1jeogVSYvCN+q1slhQs8QYjLcXioIjI4K7HjDcJJQ==",
+  "dgSpecHash": "CnyQN6d8IaupRZDWmfWPrH71IBUUrbvswBPTa1wdcssgYFFumNwm7wY6suzQfze9TdG0cHt9nMtCXeHK23ebXw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+  "projectFilePath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\WebApplication1\\Bank.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\haseeb.m\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\haseeb.m\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

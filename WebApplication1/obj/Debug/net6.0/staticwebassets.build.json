@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "ozPU8KMwOlbQHpcE5qZTZ7CirEa+BWCC4ogaz+QJEsE=",
-  "Source": "WebApplication1",
-  "BasePath": "_content/WebApplication1",
+  "Hash": "0V1Z3SrIrlodEG+74RYs1uagsudx10fzKDBDGm+Y+Uc=",
+  "Source": "Bank",
+  "BasePath": "_content/Bank",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

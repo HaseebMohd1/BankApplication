@@ -1,5 +1,4 @@
-﻿using WebApplication1.DTO;
-using WebApplication1.Models;
+﻿using Bank.Models;
 using WebApplication1.Models.AppDbContext;
 
 namespace WebApplication1.Repository
@@ -15,18 +14,18 @@ namespace WebApplication1.Repository
 
 
 
-        public  User GetUserById(int id)
+        public User GetUserById(int id)
         {
             try
             {
-                var res =  _dbContext.Users.Find(id);
+                var res = _dbContext.Users.Find(id);
 
                 if (res == null)
                 {
                     throw new Exception("No Such User Exists!!");
                 }
 
-                
+
                 return res;
 
             }
@@ -41,7 +40,7 @@ namespace WebApplication1.Repository
         {
             var user = this.GetUserById(userId);
 
-            if(user == null)
+            if (user == null)
             {
                 throw new Exception("User Not Found!!");
             }
@@ -52,7 +51,7 @@ namespace WebApplication1.Repository
         }
         public string UserBank(int userId)
         {
-            User userDetails =  this.GetUserById(userId);
+            User userDetails = this.GetUserById(userId);
             string userBankCode = userDetails.BankCode;
             return userBankCode;
         }
@@ -70,7 +69,7 @@ namespace WebApplication1.Repository
             {
                 throw new Exception("Error while fetching User Transaction Details!");
             }
-            
+
         }
 
         public bool IsValidUser(int userId)
@@ -78,7 +77,7 @@ namespace WebApplication1.Repository
             try
             {
                 var userDetails = this.GetUserById(userId);
-                if(userDetails != null && userDetails.IsActive == 1)
+                if (userDetails != null && userDetails.IsActive == 1)
                 {
                     return true;
                 }
@@ -88,8 +87,7 @@ namespace WebApplication1.Repository
             {
                 throw new Exception("Error while validating a User!!");
             }
-            
+
         }
     }
 }
- 

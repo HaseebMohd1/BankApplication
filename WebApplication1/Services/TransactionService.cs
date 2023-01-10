@@ -1,4 +1,4 @@
-﻿using WebApplication1.Models;
+﻿using Bank.Models;
 using WebApplication1.Repository;
 
 namespace WebApplication1.Services

@@ -1,4 +1,4 @@
-﻿using WebApplication1.Models;
+﻿using Bank.Models;
 using WebApplication1.Models.AppDbContext;
 
 namespace WebApplication1.Repository
