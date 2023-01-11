@@ -12,8 +12,11 @@ namespace Bank.Models
         [Required]
         public string? EmployeeEmail { get; set; }
 
-        [Required]
+        
         public string? Role { get; set; } = "Admin";
+
+        public string PasswordHash { get; set; } = string.Empty;
+        public string PasswordSalt { get; set; } = string.Empty;
 
     }
 }

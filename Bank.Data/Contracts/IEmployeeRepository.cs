@@ -23,5 +23,7 @@ namespace WebApplication1.Repository
         public List<Transaction> GetTransactionDetailsByUserId(int userId);
 
         public string DeleteUserById(int id);
+
+        public Employee GetEmployeeByEmail(string userEmail);
     }
 }

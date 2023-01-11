@@ -5,6 +5,10 @@ using Bank.Models;
 using WebApplication1.DTO;
 using WebApplication1.Repository;
 using BCrypt.Net;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace WebApplication1.Services
 {
@@ -14,13 +18,16 @@ namespace WebApplication1.Services
         private readonly IMapper _mapper;
         private readonly IRepository _repository;
 
+        private readonly IConfiguration _configuration;
 
 
-        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper, IRepository repository)
+
+        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper, IRepository repository, IConfiguration configuration)
         {
             _employeeRepository = employeeRepository;
             _mapper = mapper;
             _repository = repository;
+            _configuration = configuration;
         }
 
 
@@ -206,8 +213,85 @@ namespace WebApplication1.Services
                 return BitConverter.ToString(bytes).Replace("-", "").ToLower();
             }
         }
-       
 
+
+        
+
+        public string EmployeeLogin(string employeeEmail, string employeePassword)
+        {
+            Employee employeeDetails = _employeeRepository.GetEmployeeByEmail(employeeEmail);
+
+            if(employeeDetails == null)
+            {
+                throw new Exception("Employee with this Email doesn't exist! Please enter valid details");
+            }
+
+            string hashedPassword = employeeDetails.PasswordHash;
+            string passwordSalt = employeeDetails.PasswordSalt;
+
+            
+
+            if (!VerifyPasswordSha256(employeePassword, hashedPassword, passwordSalt))
+            {
+                throw new Exception("Entered Details are Incorrect. Please Enter valid Email & Password");
+            }
+
+            string token = CreateToken(employeeDetails);
+
+            return token;
+
+        }
+
+
+        private bool VerifyPasswordSha256(string password, string hashedPassword, string salt)
+        {
+            string userEnteredHashedPassword = CreatePasswordHashUsingSha256(password + salt);
+
+            return userEnteredHashedPassword.Equals(hashedPassword);
+        }
+
+        //private string CreatePasswordHashUsingSha256(string password)
+        //{
+        //    using (var sha256 = SHA256.Create())
+        //    {
+        //        var resBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+        //        // Console.WriteLine(resBytes + "---");
+
+        //        var hashedPassword = BitConverter.ToString(resBytes).Replace("-", "").ToLower();
+
+        //        //Console.WriteLine(resString + "\n");
+
+        //        return hashedPassword;
+
+        //    }
+        //}
+
+
+        private string CreateToken(Employee employeeDetails)
+        {
+
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, employeeDetails.EmployeeEmail),
+                new Claim(ClaimTypes.Role, employeeDetails.Role),
+            };
+
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
+
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+
+            // definig PAYLOAD of our JSON Web Token    
+            var token = new JwtSecurityToken(
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(1),
+                    signingCredentials: credentials
+                );
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return jwt;
+        }
 
     }
 }

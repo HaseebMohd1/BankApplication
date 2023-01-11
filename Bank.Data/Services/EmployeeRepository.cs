@@ -328,5 +328,18 @@ namespace WebApplication1.Repository
             
         }
 
+        public Employee GetEmployeeByEmail(string userEmail)
+        {
+
+            Employee employeeDetails = _dbContext.Employees.Where(e => e.EmployeeEmail.ToLower() == userEmail.ToLower()).FirstOrDefault();
+
+            if(employeeDetails == null)
+            {
+                return null;
+            }
+
+            return employeeDetails;
+        }
+
     }
 }

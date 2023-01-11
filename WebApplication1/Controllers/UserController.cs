@@ -24,7 +24,7 @@ namespace WebApplication1.Controllers
 
 
 
-        [HttpGet("transactions/{userId:int}"), Authorize]
+        [HttpGet("transactions/{userId:int}"), Authorize(Roles ="user")]
         public List<Transaction> GetTransactionHistory(int userId)
         {
             var res = _transactionService.GetTransactionHistoryByUserId(userId);

@@ -1,4 +1,5 @@
 ﻿using Bank.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DTO;
 using WebApplication1.Repository;
@@ -32,7 +33,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Route("users")]
+        [Route("users"), Authorize(Roles ="Admin")]
         [HttpGet]
         public Task<List<UserDto>> GetAllUsers()
         {
@@ -128,6 +129,19 @@ namespace WebApplication1.Controllers
         {
             var res = employeeRepository?.DeleteUserById(userId);
             return res;
+        }
+
+        [HttpPost("/login")]
+        public async Task<ActionResult<string>> EmployeeLogin(string employeeEmail, string password)
+        {
+            string res =  _employeeService.EmployeeLogin(employeeEmail, password);
+
+            if(res == null || res == string.Empty)
+            {
+                return BadRequest("Employee Login Failed!!");
+            } 
+
+            return Ok(res);
         }
 
     }

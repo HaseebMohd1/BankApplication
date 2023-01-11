@@ -12,5 +12,7 @@ namespace WebApplication1.Services
         public UserDto GetUserById(int userId);
 
         public UserDto CreateUser(User userDetails);
+
+        public string EmployeeLogin(string userEmail, string userPassword);
     }
 }
