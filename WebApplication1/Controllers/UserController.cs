@@ -1,4 +1,5 @@
 ﻿using Bank.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DTO;
@@ -23,7 +24,7 @@ namespace WebApplication1.Controllers
 
 
 
-        [HttpGet("transactions/{userId:int}")]
+        [HttpGet("transactions/{userId:int}"), Authorize]
         public List<Transaction> GetTransactionHistory(int userId)
         {
             var res = _transactionService.GetTransactionHistoryByUserId(userId);
