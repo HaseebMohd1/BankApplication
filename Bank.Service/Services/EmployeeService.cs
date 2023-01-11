@@ -87,12 +87,21 @@ namespace WebApplication1.Services
             }
 
 
-            // password hashing 
+            // password hashing using SHA512
             CreatePasswordHash(userDetails.UserPassword, out string passwordSalt, out string passwordHash);
 
 
-            userDetails.UserPassword = passwordHash;
-            userDetails.PasswordSalt = passwordSalt;
+            // Password Hashing using SHA256
+            string randomSalt = GenerateRandomSalt();
+
+            string hashedPassword = CreatePasswordHashUsingSha256(userDetails.UserPassword+ randomSalt);
+
+
+            userDetails.UserPassword = hashedPassword;
+            userDetails.PasswordSalt = randomSalt;
+
+            //userDetails.UserPassword = passwordHash;
+            //userDetails.PasswordSalt = passwordSalt;
 
             //userDetails.UserPassword = passwordHash;
 
@@ -168,6 +177,35 @@ namespace WebApplication1.Services
             return hashedPassword;
         }
 
+
+
+        private string CreatePasswordHashUsingSha256(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var resBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+               // Console.WriteLine(resBytes + "---");
+
+                var hashedPassword = BitConverter.ToString(resBytes).Replace("-", "").ToLower();
+
+                //Console.WriteLine(resString + "\n");
+
+                return hashedPassword;
+
+            }
+        }
+
+
+        private string GenerateRandomSalt()
+        {
+            byte[] bytes = new byte[128 / 8];
+            using (var keyGenerator = RandomNumberGenerator.Create())
+            {
+                keyGenerator.GetBytes(bytes);
+                return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+            }
+        }
        
 
 

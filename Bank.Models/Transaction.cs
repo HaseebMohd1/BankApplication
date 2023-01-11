@@ -9,7 +9,7 @@ namespace Bank.Models
         [Key]
         public int TransactionId { get; set; }
 
-        public DateTime TransactionTime { get; set; }
+        public DateTime TransactionTime { get; set; } =  DateTime.Now;
         public int Amount { get; set; }
 
         public int SenderUserId { get; set; }

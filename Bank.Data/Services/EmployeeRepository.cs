@@ -267,11 +267,13 @@ namespace WebApplication1.Repository
                     TransactionTime = new DateTime()
                 };
 
+                _dbContext.SaveChanges();
+
                 var revertedTransaction = this.performTransaction(transactionDetails.ReceiverUserId, newTransaction);
 
                 // _dbContext.Add()
 
-                _dbContext.SaveChanges();
+                //_dbContext.SaveChanges();
 
                 return Task.FromResult(transactionDetails);
             }

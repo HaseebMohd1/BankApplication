@@ -15,8 +15,8 @@ namespace WebApplication1.Repository
 
         public string GetHashedPassword(string userEmail)
         {
-            var hashedPassword = _employeeDbContext.Users.FromSql($"SELECT [UserPassword] FROM Users WHERE UserEmail = '{userEmail}'").ToString();
-            return hashedPassword;
+            var hashedPassword = _employeeDbContext.Users.FromSql($"SELECT [UserPassword] FROM Users WHERE UserEmail = '{userEmail}'").ToList();
+            return hashedPassword.ElementAt(0).UserPassword;
         }
     }
 }

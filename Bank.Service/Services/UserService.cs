@@ -2,6 +2,8 @@
 using WebApplication1.DTO;
 using WebApplication1.Repository;
 using BCrypt.Net;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace WebApplication1.Services
 {
@@ -140,23 +142,61 @@ namespace WebApplication1.Services
             }
 
 
-            string hashedPassword = _userRepository.GetHashedPassword(userEmail);
+            // string hashedPassword = _userRepository.GetHashedPassword(userEmail);
 
-            if(!VerifyPasswordBcrypt(userPassword, hashedPassword))
+            string hashedPassword = userDetails.UserPassword;
+            string passwordSalt = userDetails.PasswordSalt;
+
+            //if(!VerifyPassword(userPassword, hashedPassword, passwordSalt))
+            //{
+            //    throw new Exception("Entered Details are Incorrect. Please Enter valid Email & Password");
+            //}
+
+            if (!VerifyPasswordSha256(userPassword, hashedPassword, passwordSalt))
             {
                 throw new Exception("Entered Details are Incorrect. Please Enter valid Email & Password");
             }
+
 
             return "Login";
         }
 
 
-        private bool VerifyPasswordBcrypt(string password, string hashedPassword)
+        private bool VerifyPassword(string password, string passwordSalt, string passwordHash)
         {
-            bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
-            return isPasswordCorrect;
+            using (var hmac = new HMACSHA512(Encoding.ASCII.GetBytes(passwordSalt)))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+
+                bool isPasswordMatching = computedHash.SequenceEqual(Encoding.ASCII.GetBytes(passwordHash));
+
+                return isPasswordMatching ;
+            }
         }
 
+        private bool VerifyPasswordSha256(string password, string hashedPassword, string salt)
+        {
+            string userEnteredHashedPassword = CreatePasswordHashUsingSha256(password + salt);
+
+            return userEnteredHashedPassword.Equals(hashedPassword);
+        }
+
+        private string CreatePasswordHashUsingSha256(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var resBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                // Console.WriteLine(resBytes + "---");
+
+                var hashedPassword = BitConverter.ToString(resBytes).Replace("-", "").ToLower();
+
+                //Console.WriteLine(resString + "\n");
+
+                return hashedPassword;
+
+            }
+        }
 
     }
 }

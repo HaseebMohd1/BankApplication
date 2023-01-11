@@ -13,11 +13,11 @@ namespace Bank.Models
 
         public string? UserPhone { get; set;}
 
-        public string? UserPassword { get; set;}
+        public string UserPassword { get; set;}
 
-       // public string PasswordHash { get; set; } = string.Empty;
+        // public string PasswordHash { get; set; } = string.Empty;
 
-       public string PasswordSalt { get; set; } = string.Empty;
+        public string PasswordSalt { get; set; } = string.Empty;
 
         public string? BankCode { get; set; }
 

@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.Repository
+﻿using Bank.Models;
+
+namespace WebApplication1.Repository
 {
     public interface IUserRepository
     {
