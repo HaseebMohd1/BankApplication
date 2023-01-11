@@ -73,12 +73,12 @@ namespace WebApplication1.Controllers
 
             var res = _userService.UserLogin(userEmail, userPassword);
 
-            if(res != "Login")
+            if(res == null)
             {
                 return BadRequest("Login Failed");
             }
 
-            return Ok("Login Successfull!!! => Token : ");
+            return Ok($"Login Successfull!!! => Token : {res}");
         }
 
     }

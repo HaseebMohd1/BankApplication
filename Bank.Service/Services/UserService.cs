@@ -4,6 +4,10 @@ using WebApplication1.Repository;
 using BCrypt.Net;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace WebApplication1.Services
 {
@@ -16,12 +20,15 @@ namespace WebApplication1.Services
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IUserRepository _userRepository;
 
-        public UserService(ITransactionRepository transactionRepository, IRepository repository, IEmployeeRepository employeeRepository, IUserRepository userRepository)
+        private readonly IConfiguration _configuration;
+
+        public UserService(ITransactionRepository transactionRepository, IRepository repository, IEmployeeRepository employeeRepository, IUserRepository userRepository, IConfiguration configuration)
         {
             _transactionRepository = transactionRepository;
             _repository = repository;
             _employeeRepository = employeeRepository;
             _userRepository = userRepository;
+            _configuration = configuration;
         }
 
         private bool CheckIfSufficientBalance(int amount, int userId)
@@ -157,8 +164,9 @@ namespace WebApplication1.Services
                 throw new Exception("Entered Details are Incorrect. Please Enter valid Email & Password");
             }
 
+            string token = CreateToken(userDetails);
 
-            return "Login";
+            return token;
         }
 
 
@@ -196,6 +204,31 @@ namespace WebApplication1.Services
                 return hashedPassword;
 
             }
+        }
+
+
+        private string CreateToken(User user)
+        {
+
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, user.UserEmail)
+            };
+
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
+
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+
+            // definig PAYLOAD of our JSON Web Token    
+            var token = new JwtSecurityToken(
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(1),
+                    signingCredentials: credentials
+                );
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return jwt;
         }
 
     }
