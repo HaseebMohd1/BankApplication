@@ -25,5 +25,7 @@ namespace WebApplication1.Repository
         public string DeleteUserById(int id);
 
         public Employee GetEmployeeByEmail(string userEmail);
+
+        public Employee SaveEmployee(Employee newEmployee);
     }
 }

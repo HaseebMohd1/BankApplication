@@ -341,5 +341,22 @@ namespace WebApplication1.Repository
             return employeeDetails;
         }
 
+        public Employee SaveEmployee(Employee newEmployee)
+        {
+            _dbContext.Employees.Add(newEmployee);
+
+            _dbContext.SaveChanges();
+
+            var employeeDetails = _dbContext.Employees.Where(e => e.EmployeeEmail.ToLower() == newEmployee.EmployeeEmail.ToLower());
+
+            if (employeeDetails == null)
+            {
+                throw new Exception("Employee Registration Failed!!!");
+            }
+
+
+            return newEmployee;
+        }
+
     }
 }

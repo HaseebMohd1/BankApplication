@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Route("users"), Authorize(Roles ="Admin")]
+        [Route("users"), Authorize(Roles ="Admin,SuperAdmin")]
         [HttpGet]
         public Task<List<UserDto>> GetAllUsers()
         {
@@ -47,7 +47,7 @@ namespace WebApplication1.Controllers
             return response;
         }
 
-        [Route("user/{id:int}"), Authorize(Roles = "Admin")]
+        [Route("user/{id:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         [HttpGet]
         public UserDto GetUserById(int id)
         {
@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
             return userDetails2;
         }
 
-        [HttpPost, Authorize(Roles = "Admin")]
+        [HttpPost, Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<UserDto> CreateUser(User user)
         {
            // int res = await employeeRepository.CreateUser(user);
@@ -77,7 +77,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [HttpPut, Authorize(Roles = "Admin")]
+        [HttpPut, Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<UserDto> UpdateUser(int id, User user)
         {
             var res = await employeeRepository.UpdateUser(id, user);
@@ -92,7 +92,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Route("transaction/{id:int}"), Authorize(Roles = "Admin")]
+        [Route("transaction/{id:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPost]
         public async Task<Transaction> PerformTransaction(int id, Transaction transaction)
         {
@@ -100,7 +100,7 @@ namespace WebApplication1.Controllers
             return res;
         }
 
-        [Route("revert/{transactionId:int}"), Authorize(Roles = "Admin")]
+        [Route("revert/{transactionId:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         [HttpGet]
         public async Task<Transaction> RevertTransaction(int transactionId)
         {
@@ -115,7 +115,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Route("transactionDetails/{userId:int}"), Authorize(Roles = "Admin")]
+        [Route("transactionDetails/{userId:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         [HttpGet]
         public async Task<List<Transaction>> GetUserTransactionDetails(int userId)
         {
@@ -124,7 +124,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [HttpPut("user/delete/{userId:int}"), Authorize(Roles ="Admin")]
+        [HttpPut("user/delete/{userId:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<string> DeleteUser(int userId)
         {
             var res = employeeRepository?.DeleteUserById(userId);
@@ -140,6 +140,19 @@ namespace WebApplication1.Controllers
             {
                 return BadRequest("Employee Login Failed!!");
             } 
+
+            return Ok(res);
+        }
+
+        [HttpPost("/registerEmployee"), Authorize(Roles ="SuperAdmin")]
+        public async Task<ActionResult<string>> RegisterEmployee(string empName, string empEmail, string empPassword)
+        {
+            var res = _employeeService.CreateEmployee(empName, empEmail, empPassword);
+
+            if (res == string.Empty)
+            {
+                return BadRequest();
+            }
 
             return Ok(res);
         }

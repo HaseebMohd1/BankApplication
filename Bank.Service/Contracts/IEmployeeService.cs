@@ -14,5 +14,7 @@ namespace WebApplication1.Services
         public UserDto CreateUser(User userDetails);
 
         public string EmployeeLogin(string userEmail, string userPassword);
+
+        public string CreateEmployee(string employeeName, string employeeEmail , string employeePassword);
     }
 }

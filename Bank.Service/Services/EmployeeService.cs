@@ -95,7 +95,7 @@ namespace WebApplication1.Services
 
 
             // password hashing using SHA512
-            CreatePasswordHash(userDetails.UserPassword, out string passwordSalt, out string passwordHash);
+            //CreatePasswordHash(userDetails.UserPassword, out string passwordSalt, out string passwordHash);
 
 
             // Password Hashing using SHA256
@@ -250,23 +250,7 @@ namespace WebApplication1.Services
             return userEnteredHashedPassword.Equals(hashedPassword);
         }
 
-        //private string CreatePasswordHashUsingSha256(string password)
-        //{
-        //    using (var sha256 = SHA256.Create())
-        //    {
-        //        var resBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-        //        // Console.WriteLine(resBytes + "---");
-
-        //        var hashedPassword = BitConverter.ToString(resBytes).Replace("-", "").ToLower();
-
-        //        //Console.WriteLine(resString + "\n");
-
-        //        return hashedPassword;
-
-        //    }
-        //}
-
+        
 
         private string CreateToken(Employee employeeDetails)
         {
@@ -292,6 +276,33 @@ namespace WebApplication1.Services
 
             return jwt;
         }
+
+
+        public string CreateEmployee(string employeeName, string employeeEmail, string employeePassword)
+        {
+
+            string randomSalt = GenerateRandomSalt();
+            string hashedPassword = CreatePasswordHashUsingSha256(employeePassword + randomSalt);
+
+            Employee newEmployee = new Employee()
+            {
+                EmployeeName = employeeName,
+                EmployeeEmail = employeeEmail,
+                Role = "Admin",
+                PasswordHash = hashedPassword,
+                PasswordSalt = randomSalt
+            };
+
+            Employee newEmployeeDetails = _employeeRepository.SaveEmployee(newEmployee);
+
+            string message = $"Employee ${newEmployeeDetails.EmployeeName} with Email : {newEmployeeDetails.EmployeeEmail}";
+
+            return message;
+        }
+
+
+        
+
 
     }
 }
