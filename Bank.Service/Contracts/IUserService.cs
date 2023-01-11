@@ -12,6 +12,8 @@ namespace WebApplication1.Services
         public Task<Transaction> TransferAmount(Transaction transaction);
 
         public string UserLogin(string userName, string userPassword);
+
+        public int GetUserIdByEmail(string userEmail);
        
     }
 }

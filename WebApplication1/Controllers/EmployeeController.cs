@@ -47,7 +47,7 @@ namespace WebApplication1.Controllers
             return response;
         }
 
-        [Route("user/{id:int}")]
+        [Route("user/{id:int}"), Authorize(Roles = "Admin")]
         [HttpGet]
         public UserDto GetUserById(int id)
         {
@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
             return userDetails2;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         public async Task<UserDto> CreateUser(User user)
         {
            // int res = await employeeRepository.CreateUser(user);
@@ -77,7 +77,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPut, Authorize(Roles = "Admin")]
         public async Task<UserDto> UpdateUser(int id, User user)
         {
             var res = await employeeRepository.UpdateUser(id, user);
@@ -92,7 +92,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Route("transaction/{id:int}")]
+        [Route("transaction/{id:int}"), Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<Transaction> PerformTransaction(int id, Transaction transaction)
         {
@@ -100,7 +100,7 @@ namespace WebApplication1.Controllers
             return res;
         }
 
-        [Route("revert/{transactionId:int}")]
+        [Route("revert/{transactionId:int}"), Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<Transaction> RevertTransaction(int transactionId)
         {
@@ -115,7 +115,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Route("transactionDetails/{userId:int}")]
+        [Route("transactionDetails/{userId:int}"), Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<List<Transaction>> GetUserTransactionDetails(int userId)
         {
@@ -124,7 +124,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [HttpPut("user/delete/{userId:int}")]
+        [HttpPut("user/delete/{userId:int}"), Authorize(Roles ="Admin")]
         public async Task<string> DeleteUser(int userId)
         {
             var res = employeeRepository?.DeleteUserById(userId);

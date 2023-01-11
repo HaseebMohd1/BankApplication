@@ -1,4 +1,5 @@
-﻿using Bank.Models;
+﻿using System.Security.Claims;
+using Bank.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,27 +16,38 @@ namespace WebApplication1.Controllers
 
         private IUserService _userService;
 
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserController(ITransactionService transactionService, IUserService userService)
+
+        public UserController(ITransactionService transactionService, IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _transactionService = transactionService;
             _userService = userService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
 
-        [HttpGet("transactions/{userId:int}"), Authorize(Roles ="user")]
-        public List<Transaction> GetTransactionHistory(int userId)
+        //[HttpGet("transactions/{userId:int}"), Authorize(Roles ="user")]
+        //public List<Transaction> GetTransactionHistory(int userId)
+        [HttpGet("transactions"), Authorize(Roles = "user")]
+        public List<Transaction> GetTransactionHistory()
         {
-            var res = _transactionService.GetTransactionHistoryByUserId(userId);
+            //var temp = User?.Identity.Name;
+
+            var loggedInUserEmail =_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
+            var loggedInUserId = _userService.GetUserIdByEmail(loggedInUserEmail);
+
+            var res = _transactionService.GetTransactionHistoryByUserId(loggedInUserId);
 
             return res;
         }
 
-        [HttpPost("withdrawal/{userId:int}")]
+        [HttpPost("withdrawal/{userId:int}"), Authorize(Roles = "user")]
         public string WithdrawAmount(int amount, int userId)
         {
-
+            
             string response = _userService.WithdrawAmount(amount, userId);
 
             return response;

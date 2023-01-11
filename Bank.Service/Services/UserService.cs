@@ -22,6 +22,8 @@ namespace WebApplication1.Services
 
         private readonly IConfiguration _configuration;
 
+        
+
         public UserService(ITransactionRepository transactionRepository, IRepository repository, IEmployeeRepository employeeRepository, IUserRepository userRepository, IConfiguration configuration)
         {
             _transactionRepository = transactionRepository;
@@ -230,6 +232,19 @@ namespace WebApplication1.Services
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
             return jwt;
+        }
+
+
+        public int GetUserIdByEmail(string userEmail)
+        {
+            User userDetails = _repository.GetUserByEmail(userEmail);
+            if (userDetails == null)
+            {
+                throw new Exception("User Details doesn't exist!! -> Called from User Controller -> transactions");
+            }
+
+            int userId = userDetails.User_Id;
+            return userId;
         }
 
     }
