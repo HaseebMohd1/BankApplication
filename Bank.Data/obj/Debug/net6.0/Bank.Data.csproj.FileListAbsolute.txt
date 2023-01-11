@@ -1,4 +1,5 @@
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\bin\Debug\net6.0\Bank.Data.deps.json
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\bin\Debug\net6.0\Bank.Data.runtimeconfig.json
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\bin\Debug\net6.0\Bank.Data.dll
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\bin\Debug\net6.0\Bank.Data.pdb
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\bin\Debug\net6.0\Bank.Models.dll
@@ -12,4 +13,5 @@ C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\obj\Debug\net6.0\Bank.D
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\obj\Debug\net6.0\Bank.Data.dll
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\obj\Debug\net6.0\refint\Bank.Data.dll
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\obj\Debug\net6.0\Bank.Data.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\obj\Debug\net6.0\Bank.Data.genruntimeconfig.cache
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\obj\Debug\net6.0\ref\Bank.Data.dll

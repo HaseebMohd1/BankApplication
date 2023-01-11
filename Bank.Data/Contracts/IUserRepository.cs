@@ -2,5 +2,6 @@
 {
     public interface IUserRepository
     {
+        public string GetHashedPassword(string userEmail);
     }
 }

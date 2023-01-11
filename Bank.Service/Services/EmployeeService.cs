@@ -88,16 +88,21 @@ namespace WebApplication1.Services
 
 
             // password hashing 
-            //CreatePasswordHash(userDetails.UserPassword, out byte[] passwordSalt, out string passwordHash);
+            CreatePasswordHash(userDetails.UserPassword, out string passwordSalt, out string passwordHash);
+
+
+            userDetails.UserPassword = passwordHash;
+            userDetails.PasswordSalt = passwordSalt;
+
             //userDetails.UserPassword = passwordHash;
 
             //string hashedPassword = CreatePasswordHash2(userDetails.UserPassword);
 
-            string hashedPassword = CreatePasswordHashUsingBcrypt(userDetails.UserPassword);
+            //string hashedPassword = CreatePasswordHashUsingBcrypt(userDetails.UserPassword);
+            //userDetails.UserPassword = hashedPassword;
 
 
 
-            userDetails.UserPassword = hashedPassword;
 
             var res = _employeeRepository.CreateUser(userDetails);
 
@@ -121,20 +126,15 @@ namespace WebApplication1.Services
         }
 
 
-        private void CreatePasswordHash(string password, out byte[] passwordSalt, out string passwordHash)
+        private void CreatePasswordHash(string password, out string passwordSalt, out string passwordHash)
         {
-            byte[] key = new byte[32];
+            //byte[] key = new byte[32];
 
             using (var hmac = new HMACSHA512())
             {
-                passwordSalt = key;
+                passwordSalt = Convert.ToBase64String(hmac.Key);
                 passwordHash = Convert.ToBase64String(hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)));
             }
-
-
-            
-
-            
 
         }
 
@@ -168,10 +168,7 @@ namespace WebApplication1.Services
             return hashedPassword;
         }
 
-        private bool VerifyPasswordBcrypt(string password)
-        {
-            return true;
-        }
+       
 
 
     }

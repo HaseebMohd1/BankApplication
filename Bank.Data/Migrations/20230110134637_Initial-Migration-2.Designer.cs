@@ -12,8 +12,8 @@ using WebApplication1.Models.AppDbContext;
 namespace Bank.Data.Migrations
 {
     [DbContext(typeof(EmployeeDbContext))]
-    [Migration("20230110093348_Added_PasswordHash_And_PasswordSalt_Fields_To_User_Table")]
-    partial class AddedPasswordHashAndPasswordSaltFieldsToUserTable
+    [Migration("20230110134637_Initial-Migration-2")]
+    partial class InitialMigration2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,10 +129,6 @@ namespace Bank.Data.Migrations
 
                     b.Property<int>("IsActive")
                         .HasColumnType("int");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordSalt")
                         .IsRequired()

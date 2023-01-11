@@ -1,6 +1,7 @@
 ﻿using Bank.Models;
 using WebApplication1.DTO;
 using WebApplication1.Repository;
+using BCrypt.Net;
 
 namespace WebApplication1.Services
 {
@@ -11,12 +12,14 @@ namespace WebApplication1.Services
         private readonly ITransactionRepository _transactionRepository;
         private readonly IRepository _repository;
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(ITransactionRepository transactionRepository, IRepository repository, IEmployeeRepository employeeRepository)
+        public UserService(ITransactionRepository transactionRepository, IRepository repository, IEmployeeRepository employeeRepository, IUserRepository userRepository)
         {
             _transactionRepository = transactionRepository;
             _repository = repository;
             _employeeRepository = employeeRepository;
+            _userRepository = userRepository;
         }
 
         private bool CheckIfSufficientBalance(int amount, int userId)
@@ -136,7 +139,10 @@ namespace WebApplication1.Services
                 throw new Exception("User with Email doesn't exists!!! Please enter valid/existing User Email");
             }
 
-            if(userPassword != userDetails.UserPassword)
+
+            string hashedPassword = _userRepository.GetHashedPassword(userEmail);
+
+            if(!VerifyPasswordBcrypt(userPassword, hashedPassword))
             {
                 throw new Exception("Entered Details are Incorrect. Please Enter valid Email & Password");
             }
@@ -144,6 +150,12 @@ namespace WebApplication1.Services
             return "Login";
         }
 
+
+        private bool VerifyPasswordBcrypt(string password, string hashedPassword)
+        {
+            bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+            return isPasswordCorrect;
+        }
 
 
     }
