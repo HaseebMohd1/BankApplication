@@ -29,7 +29,7 @@ namespace WebApplication1.Repository
         public int GetCurrencyConversionValue(string currencyCode)
         {
 
-            var currecnyDetails = _dbContext.Currencies.Find(currencyCode);
+            var currecnyDetails = _dbContext.Currencies.Find(currencyCode.ToUpper());
 
             if(currecnyDetails == null)
             {

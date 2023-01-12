@@ -59,16 +59,21 @@ namespace WebApplication1.Controllers
             return response;
         }
 
-        [HttpPost("deposit")]
-        public string DepositAmount(int amount, int userId, string currency)
+        [HttpPost("deposit"), Authorize(Roles ="user")]
+        public  string DepositAmountByUser(int amount, string currency)
         {
+            var loggedInUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
-            string response = _userService.DepositAmount(amount, userId, currency);
+            var loggedInUserId = _userService.GetUserIdByEmail(loggedInUserEmail);
+
+            string response = _userService.DepositAmount(amount, loggedInUserId, currency);
+            
+
 
             return response;
         }
 
-        [HttpPost("transfer")]
+        [HttpPost("transfer"), Authorize(Roles = "user")]
         public Task<Transaction> TransferAmount(Transaction transaction)
         {
             var response = _userService.TransferAmount(transaction);
@@ -98,6 +103,16 @@ namespace WebApplication1.Controllers
             }
 
             return Ok($"Login Successfull!!! => Token : {res}");
+        }
+
+        [HttpGet("logout")]
+        public async Task<ActionResult<string>> Logout()
+        {
+
+                
+
+
+            return string.Empty;
         }
 
     }

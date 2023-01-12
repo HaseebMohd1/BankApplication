@@ -100,7 +100,7 @@ namespace WebApplication1.Services
             }
             else
             {
-                userDetails.Amount = amount;
+                userDetails.Amount += amount;
             }
             //userDetails.Amount += amount;
 
