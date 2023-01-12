@@ -59,6 +59,8 @@ namespace WebApplication1.Services
                 throw new Exception("Insufficient Balance");
             }
 
+            userDetails.Amount -= amount;
+
             Transaction newTransaction = new Transaction
             {
                 Amount = amount,
@@ -77,6 +79,8 @@ namespace WebApplication1.Services
             {
                 throw new Exception("Withdrawal Failed");
             }
+
+            _repository.UpdateUserBalance(userDetails);
 
             var remainingBalance = _repository.GetUserById(userId).Amount;
 

@@ -15,6 +15,7 @@ namespace WebApplication1.Repository
 
         public User GetUserByEmail(string userEmail);
 
+        public bool UpdateUserBalance(User userDetails);
 
     }
 }

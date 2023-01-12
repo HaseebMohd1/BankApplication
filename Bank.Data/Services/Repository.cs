@@ -100,6 +100,12 @@ namespace WebApplication1.Repository
         }
 
 
-        
+        public bool UpdateUserBalance(User userDetails)
+        {
+            _dbContext.Users.Update(userDetails);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
     }
 }

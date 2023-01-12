@@ -44,11 +44,17 @@ namespace WebApplication1.Controllers
             return res;
         }
 
-        [HttpPost("withdrawal/{userId:int}"), Authorize(Roles = "user")]
-        public string WithdrawAmount(int amount, int userId)
+        [HttpPost("withdrawal"), Authorize(Roles = "user")]
+        public string WithdrawAmount(int amount)
         {
             
-            string response = _userService.WithdrawAmount(amount, userId);
+            
+
+            var loggedInUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
+            var loggedInUserId = _userService.GetUserIdByEmail(loggedInUserEmail);
+
+            string response = _userService.WithdrawAmount(amount, loggedInUserId);
 
             return response;
         }
