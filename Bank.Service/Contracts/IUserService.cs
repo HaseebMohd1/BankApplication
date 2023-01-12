@@ -14,6 +14,8 @@ namespace WebApplication1.Services
         public string UserLogin(string userName, string userPassword);
 
         public int GetUserIdByEmail(string userEmail);
-       
+
+        public User GetUserDetails(int userId);
+
     }
 }

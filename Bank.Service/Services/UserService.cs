@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.Extensions.Primitives;
 
 namespace WebApplication1.Services
 {
@@ -216,7 +217,7 @@ namespace WebApplication1.Services
         private string CreateToken(User user)
         {
 
-            List<Claim> claims = new List<Claim>
+                List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, user.UserEmail),
                 new Claim(ClaimTypes.Role, user.Role),
@@ -250,6 +251,20 @@ namespace WebApplication1.Services
             int userId = userDetails.User_Id;
             return userId;
         }
+
+        public User GetUserDetails(int userId)
+        {
+            User userDetails = _repository.GetUserById(userId);
+
+            if(userDetails == null)
+            {
+                throw new Exception("Error occured : User Not Found => Trying to Logout");
+            }
+
+            return userDetails;
+        }
+
+        
 
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
 using Bank.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication1.DTO;
+using Microsoft.Extensions.Primitives;
 using WebApplication1.Services;
+using Bank.Data.DTO;
 
 namespace WebApplication1.Controllers
 {
@@ -81,19 +81,11 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(string userEmail, string userPassword)
+        public async Task<ActionResult<string>> Login(UserLogin userLoginDetails)
         {
-            //if (user.UserName != userDetails.UserName)
-            //{
-            //    return BadRequest("User Not Found");
-            //}
-
-            //if (!VerifyPassword(userDetails.Password, user.PasswordSalt, user.PasswordHash))
-            //{
-            //    return BadRequest("Incorrect Credentials!!!");
-            //}
-
-            //string token = CreateToken(user);
+            
+            string userEmail = userLoginDetails.userEmail;
+            string userPassword = userLoginDetails.userPassword;
 
             var res = _userService.UserLogin(userEmail, userPassword);
 
@@ -105,15 +97,61 @@ namespace WebApplication1.Controllers
             return Ok($"Login Successfull!!! => Token : {res}");
         }
 
-        [HttpGet("logout")]
+
+        [HttpPost("logintest")]
+        public async Task<ActionResult<string>> LoginTest(UserLogin userLoginDetails)
+        {
+            string userEmail = userLoginDetails.userEmail;
+            string userPassword = userLoginDetails.userPassword;
+
+            
+
+            var res = _userService.UserLogin(userEmail, userPassword);
+
+            if (res == null)
+            {
+                return BadRequest("Login Failed");
+            }
+
+            return Ok($"Login Successfull!!! => Token : {res}");
+            }
+
+
+
+
+        [HttpGet("logout"), Authorize(Roles = "user")]
         public async Task<ActionResult<string>> Logout()
         {
 
-                
+            var loggedInUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
+            var loggedInUserId = _userService.GetUserIdByEmail(loggedInUserEmail);
+
+            User userDetails = _userService.GetUserDetails(loggedInUserId);
+
+
+            string tempRes = GetCurrentAsync();
+            _httpContextAccessor.HttpContext.Request.Headers["authorization"] = string.Empty;
+
+            var tempHttp = _httpContextAccessor.HttpContext.Items;
+
+            //var testObj = new JwtSecurityTokenHandler();
+            //var res = testObj.ReadToken("eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJkYXZpZEBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiZXhwIjoxNjczNTg3NTgxfQ.jsQYDj8kFBU8vQxUohcDoNGT8UBN8dFrRb6BsnZs0L0");
 
 
             return string.Empty;
         }
+
+        private string GetCurrentAsync()
+        {
+            var authorizationHeader = _httpContextAccessor.HttpContext.Request.Headers["authorization"];
+
+            return authorizationHeader == StringValues.Empty
+                ? string.Empty
+                : authorizationHeader.Single().Split(" ").Last();
+        }
+
+        
 
     }
 }
