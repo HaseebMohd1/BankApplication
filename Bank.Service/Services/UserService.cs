@@ -134,12 +134,34 @@ namespace WebApplication1.Services
 
 
 
-        public Task<Transaction> TransferAmount(Transaction transaction)
+        //public Task<Transaction> TransferAmount(Transaction transaction)
+        //{
+
+        //    var userId = transaction.SenderUserId;
+
+        //    var res =  _employeeRepository.performTransaction(userId, transaction);
+
+
+        //    return res;
+        //}
+
+        public Task<Transaction> TransferAmount(UserTransfer transaction)
         {
 
             var userId = transaction.SenderUserId;
 
-            var res =  _employeeRepository.performTransaction(userId, transaction);
+            Transaction newTransaction = new Transaction
+            {
+                SenderUserId = transaction.SenderUserId,
+                ReceiverUserId = transaction.ReceiverUserId,
+                Amount = transaction.Amount,
+                TransactionTime = DateTime.Now,
+                TransactionMethod = transaction.TransactionMethod
+                
+                   
+            };
+
+            var res = _employeeRepository.performTransaction(userId, newTransaction);
 
 
             return res;

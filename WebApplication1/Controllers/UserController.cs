@@ -45,10 +45,8 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("withdrawal"), Authorize(Roles = "user")]
-        public string WithdrawAmount(int amount)
+        public string WithdrawAmount([FromBody] int amount)
         {
-            
-            
 
             var loggedInUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
@@ -60,8 +58,12 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("deposit"), Authorize(Roles ="user")]
-        public  string DepositAmountByUser(int amount, string currency)
+        public  string DepositAmountByUser([FromBody] UserDeposit userDepositDetails)
         {
+
+            int amount = userDepositDetails.Amount;
+            string currency = userDepositDetails?.Currency;
+
             var loggedInUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
             var loggedInUserId = _userService.GetUserIdByEmail(loggedInUserEmail);
@@ -74,11 +76,21 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("transfer"), Authorize(Roles = "user")]
-        public Task<Transaction> TransferAmount(Transaction transaction)
+        public Task<Transaction> TransferAmount(UserTransfer userTransferDetails)
         {
-            var response = _userService.TransferAmount(transaction);
+            var response = _userService.TransferAmount(userTransferDetails);
             return response;
         }
+
+
+        //[HttpPost("transfertest"), Authorize(Roles = "user")]
+        //public Task<Transaction> TransferAmountTest(UserTransfer userTransferDetails)
+        //{
+        //    var response = _userService.TransferAmount(userTransferDetails);
+            
+        //    return response;
+        //}
+
 
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(UserLogin userLoginDetails)
@@ -98,23 +110,24 @@ namespace WebApplication1.Controllers
         }
 
 
-        [HttpPost("logintest")]
-        public async Task<ActionResult<string>> LoginTest(UserLogin userLoginDetails)
-        {
-            string userEmail = userLoginDetails.userEmail;
-            string userPassword = userLoginDetails.userPassword;
+        //[HttpPost("logintest")]
+        //public async Task<ActionResult<string>> LoginTest(UserLogin userLoginDetails)
+        //{
+        //    string userEmail = userLoginDetails.userEmail;
+        //    string userPassword = userLoginDetails.userPassword;
 
             
 
-            var res = _userService.UserLogin(userEmail, userPassword);
+        //    var res = _userService.UserLogin(userEmail, userPassword);
 
-            if (res == null)
-            {
-                return BadRequest("Login Failed");
-            }
+        //    if (res == null)
+        //    {
+        //        return BadRequest("Login Failed");
+        //    }
 
-            return Ok($"Login Successfull!!! => Token : {res}");
-            }
+        //    return Ok($"Login Successfull!!! => Token : {res}");
+            
+        //}
 
 
 
