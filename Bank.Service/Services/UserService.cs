@@ -9,6 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.Extensions.Primitives;
+using Bank.Models.ViewModel;
+using Azure.Core;
 
 namespace WebApplication1.Services
 {
@@ -235,6 +237,17 @@ namespace WebApplication1.Services
             }
         }
 
+        private string GenerateRandomSalt()
+        {
+            byte[] bytes = new byte[128 / 8];
+            using (var keyGenerator = RandomNumberGenerator.Create())
+            {
+                keyGenerator.GetBytes(bytes);
+                return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+            }
+        }
+
+
 
         private string CreateToken(User user)
         {
@@ -286,7 +299,43 @@ namespace WebApplication1.Services
             return userDetails;
         }
 
-        
+        public bool ResetPassword(string userEmail, UserResetPassword userResetPassword)
+        {
+
+            //User userDetails = _repository.GetUserByEmail(userEmail) ?? new User();
+            User userDetails = _repository.GetUserByEmail(userEmail);
+            if (userDetails == null)
+            {
+                throw new Exception("Error occured : User Not Found => Trying to Reset Password");
+            }
+
+            string hashedPassword = userDetails.UserPassword;
+            string passwordSalt = userDetails.PasswordSalt;
+
+            if (!VerifyPasswordSha256(userResetPassword.OldPassword, hashedPassword, passwordSalt))
+            {
+                throw new Exception("Entered Details are Incorrect. Please Enter valid Email & Password");
+            }
+
+
+
+            
+
+            // Password Hashing using SHA256
+            string newRandomSalt = GenerateRandomSalt();
+
+            string newHashedPassword = CreatePasswordHashUsingSha256(userResetPassword.NewPassword + newRandomSalt);
+
+
+            userDetails.UserPassword = newHashedPassword;
+            userDetails.PasswordSalt = newRandomSalt;
+
+            bool isUpdateSuccessful =  _repository.UpdateUserDetails(userDetails);
+
+            return isUpdateSuccessful;
+        }
+
+
 
     }
 }

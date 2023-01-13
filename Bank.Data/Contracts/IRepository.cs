@@ -17,5 +17,7 @@ namespace WebApplication1.Repository
 
         public bool UpdateUserBalance(User userDetails);
 
+        public bool UpdateUserDetails(User userDetails);
+
     }
 }

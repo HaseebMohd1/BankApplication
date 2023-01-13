@@ -1,4 +1,5 @@
 ﻿using Bank.Models;
+using Bank.Models.ViewModel;
 using WebApplication1.DTO;
 
 namespace WebApplication1.Services
@@ -18,6 +19,8 @@ namespace WebApplication1.Services
         public User GetUserDetails(int userId);
 
        // public Task<Transaction> TransferAmountTest(UserTransfer transaction);
+
+        public bool ResetPassword(string userEmail, UserResetPassword userResetPassword);
 
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using WebApplication1.Services;
 using Bank.Data.DTO;
+using Bank.Models.ViewModel;
 
 namespace WebApplication1.Controllers
 {
@@ -164,6 +165,39 @@ namespace WebApplication1.Controllers
                 : authorizationHeader.Single().Split(" ").Last();
         }
 
+        [HttpGet("details"), Authorize(Roles ="user")]
+        public async Task<ActionResult<User>> UserDetails()
+        {
+            var loggedInUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
+            var loggedInUserId = _userService.GetUserIdByEmail(loggedInUserEmail);
+
+            User userDetails = _userService.GetUserDetails(loggedInUserId);
+
+
+            return Ok(userDetails);
+        }
+
+        [HttpPost("resetpassword"), Authorize(Roles ="user")]
+        public async Task<ActionResult<string>> ResetPassword(UserResetPassword userResetPassword)
+        {
+
+            if (!userResetPassword.NewPassword.Equals(userResetPassword.ConfirmPassword))
+            {
+                return BadRequest("New Password doesn't match with Confirm Password. Please try again!!")
+            }
+
+            var loggedInUserEmail  = _httpContextAccessor?.HttpContext?.User.FindFirstValue(ClaimTypes.Email);
+
+            bool res = _userService.ResetPassword(loggedInUserEmail, userResetPassword);
+
+            if (!res)
+            {
+                return BadRequest("Password Reset Failed! Please try again!!");
+            }
+
+            return Ok("Password Updated Successfully!!");
+        }
         
 
     }

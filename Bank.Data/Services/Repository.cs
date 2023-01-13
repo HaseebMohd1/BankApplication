@@ -107,5 +107,13 @@ namespace WebApplication1.Repository
 
             return true;
         }
+
+        public bool UpdateUserDetails(User userDetails)
+        {
+            _dbContext.Users.Update(userDetails);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
     }
 }
