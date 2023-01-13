@@ -107,6 +107,13 @@ namespace WebApplication1.Services
             userDetails.UserPassword = hashedPassword;
             userDetails.PasswordSalt = randomSalt;
 
+            // create unique user id
+            string subString = userDetails.UserName.Substring(0, 4).ToLower();
+
+            string dateString = DateTime.Now.ToString("yyMMddHHmmssff");
+
+            userDetails.UniqueUserId = subString + dateString;
+
             //userDetails.UserPassword = passwordHash;
             //userDetails.PasswordSalt = passwordSalt;
 
@@ -135,6 +142,7 @@ namespace WebApplication1.Services
                 BankCode = userDetails.BankCode,
                 BankName = userDetails.BankName,
                 AccountNumber = userDetails.AccountNumber
+                
             };
 
             return newUser;
@@ -295,7 +303,7 @@ namespace WebApplication1.Services
 
             Employee newEmployeeDetails = _employeeRepository.SaveEmployee(newEmployee);
 
-            string message = $"Employee ${newEmployeeDetails.EmployeeName} with Email : {newEmployeeDetails.EmployeeEmail}";
+            string message = $"Employee {newEmployeeDetails.EmployeeName} with Email : {newEmployeeDetails.EmployeeEmail}";
 
             return message;
         }

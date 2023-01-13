@@ -184,7 +184,7 @@ namespace WebApplication1.Controllers
 
             if (!userResetPassword.NewPassword.Equals(userResetPassword.ConfirmPassword))
             {
-                return BadRequest("New Password doesn't match with Confirm Password. Please try again!!")
+                return BadRequest("New Password doesn't match with Confirm Password. Please try again!!");
             }
 
             var loggedInUserEmail  = _httpContextAccessor?.HttpContext?.User.FindFirstValue(ClaimTypes.Email);

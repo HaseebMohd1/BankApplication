@@ -29,5 +29,8 @@ namespace Bank.Models
         public string? Role { get; set; } = "user";
 
         public int IsActive { get; set; } = 1;
+
+        // adding unique id for the user
+        public string? UniqueUserId { get; set; }
     }
 }
