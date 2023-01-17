@@ -27,5 +27,9 @@ namespace WebApplication1.Repository
         public Employee GetEmployeeByEmail(string userEmail);
 
         public Employee SaveEmployee(Employee newEmployee);
+
+        //public User GetUserDetailsById(int userId);
+
+        public Task<UserDto> UpdateUserNew(int id, User user);
     }
 }

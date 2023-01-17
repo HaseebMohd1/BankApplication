@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Bank.Models.ViewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Services
 {
@@ -297,8 +298,40 @@ namespace WebApplication1.Services
             return message;
         }
 
+        public Task<UserDto> UpdateUser(UserUpdate userRegisterDetails, string employeeEmail)
+        {
+            User userDetails = _employeeRepository.GetUserDetails(userRegisterDetails.UserId);
 
-        
+            if(userDetails == null)
+            {
+                throw new Exception("Error : Couldn't fetch user details using the __userId__");
+            }
+
+            if (userDetails != null)
+            {
+
+                userDetails.User_Id = userRegisterDetails.UserId;
+
+                userDetails.AccountNumber = userDetails.AccountNumber;
+                userDetails.Role = userDetails.Role;
+                userDetails.UserEmail = userRegisterDetails.UserEmail;
+                userDetails.UserPhone = userRegisterDetails.UserPhone;
+                userDetails.BankName = userDetails.BankName;
+                userDetails.BankCode = userDetails.BankCode;
+                userDetails.Amount = userDetails.Amount; 
+                userDetails.UserPassword = userDetails.UserPassword;
+
+                userDetails.ModifiedBy = employeeEmail;
+                userDetails.ModifiedOn = DateTime.Now;
+            }
+
+            
+
+            var updatedUserDetails = _employeeRepository.UpdateUserNew(userRegisterDetails.UserId, userDetails);
+
+            return  updatedUserDetails;
+        }
+
 
 
     }

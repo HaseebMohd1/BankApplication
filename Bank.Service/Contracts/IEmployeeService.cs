@@ -1,4 +1,5 @@
 ﻿using Bank.Models;
+using Bank.Models.ViewModel;
 using WebApplication1.DTO;
 
 namespace WebApplication1.Services
@@ -16,5 +17,8 @@ namespace WebApplication1.Services
         public string EmployeeLogin(string userEmail, string userPassword);
 
         public string CreateEmployee(string employeeName, string employeeEmail , string employeePassword);
+
+        public Task<UserDto> UpdateUser(UserUpdate userRegisterDetails, string employeeEmail);
+        
     }
 }

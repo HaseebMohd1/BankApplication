@@ -91,17 +91,38 @@ namespace WebApplication1.Controllers
         
 
 
-        [HttpPut, Authorize(Roles = "Admin,SuperAdmin")]
-        public async Task<UserDto> UpdateUser(int id, User user)
+        //[HttpPut, Authorize(Roles = "Admin,SuperAdmin")]
+        //public async Task<UserDto> UpdateUser(int id, User user)
+        //{
+
+
+        //    string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
+            
+
+        //    var res = await employeeRepository.UpdateUser(id, user);
+
+
+        //    if (res == null)
+        //    {
+        //        return null;
+        //    }
+
+        //    return res;
+        //}
+
+
+        // Test - User Update
+        [HttpPut("updateUser"), Authorize(Roles = "Admin,SuperAdmin")]
+        public async  Task<ActionResult<UserDto>> UpdateUserTest(UserUpdate userUpdateDetails)
         {
 
 
             string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
-            user.ModifiedBy = employeeEmail;
-            user.ModifiedOn = DateTime.UtcNow;
 
-            var res = await employeeRepository.UpdateUser(id, user);
+
+            var res = await _employeeService.UpdateUser(userUpdateDetails, employeeEmail);
 
 
             if (res == null)
@@ -109,8 +130,10 @@ namespace WebApplication1.Controllers
                 return null;
             }
 
-            return res;
+            return Ok(res);
         }
+
+
 
 
         [Route("transaction/{id:int}"), Authorize(Roles = "Admin,SuperAdmin")]

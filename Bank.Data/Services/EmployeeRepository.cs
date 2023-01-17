@@ -1,6 +1,7 @@
 ﻿//using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Bank.Models;
+using Bank.Models.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.DTO;
 using WebApplication1.Models.AppDbContext;
@@ -53,9 +54,17 @@ namespace WebApplication1.Repository
 
         public User GetUserDetails(int userId)
         {
-            var userDetails = _dbContext.Users.Find(userId);
+            try
+            {
+                var userDetails = _dbContext.Users.Find(userId);
 
-            return userDetails;
+                return userDetails;
+            }
+            catch
+            {
+                throw new Exception("Error while retrieving User Details using UserId");
+            }
+            
         }
 
         public async Task<UserDto> GetUserById(int id)
@@ -83,6 +92,21 @@ namespace WebApplication1.Repository
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public User GetUserDetailsById(int userId)
+        {
+
+            try
+            {
+                var userDetails = _dbContext.Users.Find(userId);
+                return userDetails;
+            }
+            catch
+            {
+                throw new Exception("Error while retrieving User Details using UserId");
+            }
+
         }
 
         public async Task<int> CreateUser(User user)
@@ -125,6 +149,8 @@ namespace WebApplication1.Repository
                 result.UserPassword= user.UserPassword;
 
 
+                _dbContext.Update(result);
+
                 await _dbContext.SaveChangesAsync();
 
                 var result2 = _mapper.Map<UserDto>(result);
@@ -132,6 +158,23 @@ namespace WebApplication1.Repository
                 return result2;
             }
             return null;
+        }
+
+        public async Task<UserDto> UpdateUserNew(int id, User user)
+        {
+            try
+            {
+                _dbContext.Update(user);
+                await _dbContext.SaveChangesAsync();
+
+                var res = _mapper.Map<UserDto>(user);
+                return res;
+            }
+            catch
+            {
+                throw new Exception("Error : Something went wrong while updating the User Details");
+            }
+           
         }
 
 
