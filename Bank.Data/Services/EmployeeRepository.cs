@@ -189,8 +189,22 @@ namespace WebApplication1.Repository
 
                 bool sameBank = false;
 
+                
+                //“TXN” +bank ID + Account ID + current date
+
                 User senderDetails = _repository.GetUserById(transaction.SenderUserId);
                 User receiverDetails = _repository.GetUserById(transaction.ReceiverUserId);
+
+
+                long ticks = DateTime.Now.Ticks;
+                byte[] bytes = BitConverter.GetBytes(ticks);
+                string dateId = Convert.ToBase64String(bytes)
+                                        .Replace('+', '_')
+                                        .Replace('/', '-')
+                                        .TrimEnd('=');
+                Console.WriteLine(dateId);
+
+                string uniqueTransactionId = $"TXN{senderDetails.UniqueUserId}{DateTime.Now.Ticks}";
 
                 int minimumRequiredBalance = transaction.Amount;
 
@@ -245,6 +259,8 @@ namespace WebApplication1.Repository
                 transaction.CreditedAccount = transaction.Amount;
 
                 transaction.ServiceCharge = serviceCharge;
+
+                transaction.TransactionUniqueId = uniqueTransactionId;
 
 
 

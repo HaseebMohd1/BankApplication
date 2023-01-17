@@ -19,6 +19,9 @@ namespace WebApplication1.Services
         public string CreateEmployee(string employeeName, string employeeEmail , string employeePassword);
 
         public Task<UserDto> UpdateUser(UserUpdate userRegisterDetails, string employeeEmail);
-        
+
+
+        public Task<Transaction> PerformTransaction(int id, Transaction transaction, string employeeEmail);
+
     }
 }

@@ -25,6 +25,9 @@ namespace Bank.Models
 
         public string TransactionCurrency { get; set; } = "INR";
 
+        public string TransactionUniqueId { get; set; } = string.Empty;
+
+        public string CreatedBy { get; set; } = string.Empty;
 
 
     }

@@ -45,6 +45,12 @@ namespace WebApplication1.Controllers
             return res;
         }
 
+
+
+
+
+
+
         [HttpPost("withdrawal"), Authorize(Roles = "user")]
         public string WithdrawAmount([FromBody] int amount)
         {
@@ -57,6 +63,11 @@ namespace WebApplication1.Controllers
 
             return response;
         }
+
+
+
+
+
 
         [HttpPost("deposit"), Authorize(Roles ="user")]
         public  string DepositAmountByUser([FromBody] UserDeposit userDepositDetails)
@@ -76,12 +87,18 @@ namespace WebApplication1.Controllers
             return response;
         }
 
+
+
+
         [HttpPost("transfer"), Authorize(Roles = "user")]
         public Task<Transaction> TransferAmount(UserTransfer userTransferDetails)
         {
             var response = _userService.TransferAmount(userTransferDetails);
             return response;
         }
+
+
+
 
 
         //[HttpPost("transfertest"), Authorize(Roles = "user")]
@@ -91,6 +108,9 @@ namespace WebApplication1.Controllers
             
         //    return response;
         //}
+
+
+
 
 
         [HttpPost("login")]
@@ -111,6 +131,10 @@ namespace WebApplication1.Controllers
         }
 
 
+
+
+
+
         //[HttpPost("logintest")]
         //public async Task<ActionResult<string>> LoginTest(UserLogin userLoginDetails)
         //{
@@ -129,6 +153,8 @@ namespace WebApplication1.Controllers
         //    return Ok($"Login Successfull!!! => Token : {res}");
             
         //}
+
+
 
 
 
@@ -156,6 +182,10 @@ namespace WebApplication1.Controllers
             return string.Empty;
         }
 
+
+
+
+
         private string GetCurrentAsync()
         {
             var authorizationHeader = _httpContextAccessor.HttpContext.Request.Headers["authorization"];
@@ -164,6 +194,10 @@ namespace WebApplication1.Controllers
                 ? string.Empty
                 : authorizationHeader.Single().Split(" ").Last();
         }
+
+
+
+
 
         [HttpGet("details"), Authorize(Roles ="user")]
         public async Task<ActionResult<User>> UserDetails()
@@ -177,6 +211,10 @@ namespace WebApplication1.Controllers
 
             return Ok(userDetails);
         }
+
+
+
+
 
         [HttpPost("resetpassword"), Authorize(Roles ="user")]
         public async Task<ActionResult<string>> ResetPassword(UserResetPassword userResetPassword)

@@ -54,6 +54,8 @@ namespace WebApplication1.Controllers
             return response;
         }
 
+
+
         [Route("user/{id:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         [HttpGet]
         public UserDto GetUserById(int id)
@@ -64,6 +66,8 @@ namespace WebApplication1.Controllers
 
             return userDetails2;
         }
+
+
 
         [HttpPost, Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<UserDto> CreateUser(User user)
@@ -88,30 +92,8 @@ namespace WebApplication1.Controllers
 
         }
 
+
         
-
-
-        //[HttpPut, Authorize(Roles = "Admin,SuperAdmin")]
-        //public async Task<UserDto> UpdateUser(int id, User user)
-        //{
-
-
-        //    string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
-
-            
-
-        //    var res = await employeeRepository.UpdateUser(id, user);
-
-
-        //    if (res == null)
-        //    {
-        //        return null;
-        //    }
-
-        //    return res;
-        //}
-
-
         // Test - User Update
         [HttpPut("updateUser"), Authorize(Roles = "Admin,SuperAdmin")]
         public async  Task<ActionResult<UserDto>> UpdateUserTest(UserUpdate userUpdateDetails)
@@ -136,13 +118,21 @@ namespace WebApplication1.Controllers
 
 
 
-        [Route("transaction/{id:int}"), Authorize(Roles = "Admin,SuperAdmin")]
+        [Route("transaction"), Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPost]
-        public async Task<Transaction> PerformTransaction(int id, Transaction transaction)
+        public async Task<Transaction> PerformTransaction([FromBody] Transaction transaction)
         {
-            var res = await employeeRepository.performTransaction(id, transaction);
-            return res;
+            int id = transaction.SenderUserId;
+            //var res = await employeeRepository.performTransaction(id, transaction);
+
+            string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
+            var res2 = await _employeeService.PerformTransaction(id, transaction, employeeEmail);
+            return res2;
         }
+
+
+
 
         [Route("revert/{transactionId:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         [HttpGet]
@@ -159,6 +149,8 @@ namespace WebApplication1.Controllers
         }
 
 
+
+
         [Route("transactionDetails/{userId:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         [HttpGet]
         public async Task<List<Transaction>> GetUserTransactionDetails(int userId)
@@ -168,12 +160,17 @@ namespace WebApplication1.Controllers
         }
 
 
+
+
         [HttpPut("user/delete/{userId:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<string> DeleteUser(int userId)
         {
             var res = employeeRepository?.DeleteUserById(userId);
             return res;
         }
+
+
+
 
         [HttpPost("/login")]
         public async Task<ActionResult<string>> EmployeeLogin(string employeeEmail, string password)
@@ -187,6 +184,9 @@ namespace WebApplication1.Controllers
 
             return Ok(res);
         }
+
+
+
 
         [HttpPost("/registerEmployee"), Authorize(Roles ="SuperAdmin")]
         public async Task<ActionResult<string>> RegisterEmployee(string empName, string empEmail, string empPassword)

@@ -334,5 +334,16 @@ namespace WebApplication1.Services
 
 
 
+
+        public Task<Transaction> PerformTransaction(int id, Transaction transaction, string employeeEmail)
+        {
+
+            transaction.CreatedBy = employeeEmail;
+
+            var res = _employeeRepository.performTransaction(id, transaction);
+
+            return res;
+        }
+
     }
 }
