@@ -138,7 +138,11 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<Transaction> RevertTransaction(int transactionId)
         {
-            Transaction revertedTransaction = await employeeRepository.RevertTransaction(transactionId);
+
+            string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+            //Transaction revertedTransaction = await employeeRepository.RevertTransaction(transactionId);
+
+            Transaction revertedTransaction = await _employeeService.RevertTransaction(transactionId, employeeEmail);
 
             if (revertedTransaction == null)
             {

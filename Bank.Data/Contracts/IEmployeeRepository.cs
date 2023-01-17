@@ -18,7 +18,7 @@ namespace WebApplication1.Repository
 
         public Transaction GetTransactionDetails(int transactionId);
 
-        public Task<Transaction> RevertTransaction(int transactionId);
+        public Task<Transaction> RevertTransaction(int transactionId, string employeeName);
 
         public List<Transaction> GetTransactionDetailsByUserId(int userId);
 

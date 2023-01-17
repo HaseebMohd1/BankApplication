@@ -299,7 +299,7 @@ namespace WebApplication1.Repository
             
         }
 
-        public Task<Transaction> RevertTransaction(int transactionId)
+        public Task<Transaction> RevertTransaction(int transactionId, string employeeName)
         {
             Transaction transactionDetails = this.GetTransactionDetails(transactionId);
             try
@@ -323,7 +323,9 @@ namespace WebApplication1.Repository
                     ReceiverUserId = transactionDetails.SenderUserId,
                     Amount = transactionDetails.Amount,
                     TransactionMethod = transactionDetails.TransactionMethod,
-                    TransactionTime = new DateTime()
+                    TransactionTime = DateTime.Now,
+                    CreatedBy = employeeName
+                    
                 };
 
                 _dbContext.SaveChanges();

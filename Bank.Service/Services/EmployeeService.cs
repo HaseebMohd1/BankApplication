@@ -345,5 +345,14 @@ namespace WebApplication1.Services
             return res;
         }
 
+
+
+        public Task<Transaction> RevertTransaction(int id, string employeeEmail)
+        {
+            var res = _employeeRepository.RevertTransaction(id, employeeEmail);
+
+            return res;
+        }
+
     }
 }

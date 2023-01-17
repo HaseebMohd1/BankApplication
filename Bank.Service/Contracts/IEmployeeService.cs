@@ -23,5 +23,7 @@ namespace WebApplication1.Services
 
         public Task<Transaction> PerformTransaction(int id, Transaction transaction, string employeeEmail);
 
+        public Task<Transaction> RevertTransaction(int id, string employeeEmail);
+
     }
 }
