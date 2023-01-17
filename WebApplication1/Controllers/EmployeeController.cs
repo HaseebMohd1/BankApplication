@@ -1,4 +1,6 @@
-﻿using Bank.Models;
+﻿using System.Security.Claims;
+using Bank.Models;
+using Bank.Models.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DTO;
@@ -26,10 +28,13 @@ namespace WebApplication1.Controllers
 
         private readonly IEmployeeService _employeeService;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, IEmployeeService employeeService)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public EmployeeController(IEmployeeRepository employeeRepository, IEmployeeService employeeService, IHttpContextAccessor httpContextAccessor)
         {
             this.employeeRepository = employeeRepository;
             _employeeService = employeeService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -37,6 +42,8 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public Task<List<UserDto>> GetAllUsers()
         {
+
+            
 
             //var response = await _dbContext.Employees.ToList();
 
@@ -61,7 +68,12 @@ namespace WebApplication1.Controllers
         [HttpPost, Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<UserDto> CreateUser(User user)
         {
-           // int res = await employeeRepository.CreateUser(user);
+            // int res = await employeeRepository.CreateUser(user);
+
+            string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
+            user.CreatedBy = employeeEmail;
+            user.CreatedOn = DateTime.UtcNow;
 
             UserDto newUserDetails = _employeeService.CreateUser(user);
 
@@ -76,10 +88,19 @@ namespace WebApplication1.Controllers
 
         }
 
+        
+
 
         [HttpPut, Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<UserDto> UpdateUser(int id, User user)
         {
+
+
+            string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
+            user.ModifiedBy = employeeEmail;
+            user.ModifiedOn = DateTime.UtcNow;
+
             var res = await employeeRepository.UpdateUser(id, user);
 
 

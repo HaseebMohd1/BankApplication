@@ -13,7 +13,7 @@ namespace Bank.Models
 
         public string? UserPhone { get; set;}
 
-        public string UserPassword { get; set;}
+        public string? UserPassword { get; set;}
 
         // public string PasswordHash { get; set; } = string.Empty;
 
@@ -32,5 +32,12 @@ namespace Bank.Models
 
         // adding unique id for the user
         public string? UniqueUserId { get; set; }
+
+        public string? CreatedBy { get; set; }
+        public DateTime CreatedOn { get; set; }
+
+        public string? ModifiedBy { get; set; }
+
+        public DateTime ModifiedOn { get; set; }
     }
 }

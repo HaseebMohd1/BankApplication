@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Bank.Models
+﻿namespace Bank.Models.ViewModel
 {
     public class UserTransfer
     {
@@ -14,7 +8,7 @@ namespace Bank.Models
         public int ReceiverUserId { get; set; }
         public string? TransactionMethod { get; set; }
 
-        
+
 
     }
 }

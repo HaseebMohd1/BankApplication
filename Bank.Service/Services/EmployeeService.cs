@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Bank.Models.ViewModel;
 
 namespace WebApplication1.Services
 {
@@ -93,11 +94,6 @@ namespace WebApplication1.Services
                 throw new Exception("User already exists with this Email. Please try with other Email.");
             }
 
-
-            // password hashing using SHA512
-            //CreatePasswordHash(userDetails.UserPassword, out string passwordSalt, out string passwordHash);
-
-
             // Password Hashing using SHA256
             string randomSalt = GenerateRandomSalt();
 
@@ -114,16 +110,9 @@ namespace WebApplication1.Services
 
             userDetails.UniqueUserId = subString + dateString;
 
-            //userDetails.UserPassword = passwordHash;
-            //userDetails.PasswordSalt = passwordSalt;
 
-            //userDetails.UserPassword = passwordHash;
-
-            //string hashedPassword = CreatePasswordHash2(userDetails.UserPassword);
-
-            //string hashedPassword = CreatePasswordHashUsingBcrypt(userDetails.UserPassword);
-            //userDetails.UserPassword = hashedPassword;
-
+            // create unique BankAccount Number
+            userDetails.AccountNumber = subString + userDetails.BankCode.ToLower() + dateString;
 
 
 
@@ -149,7 +138,7 @@ namespace WebApplication1.Services
 
         }
 
-
+     
         private void CreatePasswordHash(string password, out string passwordSalt, out string passwordHash)
         {
             //byte[] key = new byte[32];
