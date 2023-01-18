@@ -34,7 +34,7 @@ namespace Bank.Data.Services
            
         }
 
-        public BankDetail CreateBank(string bankCode, string bankName)
+        public BankDetail CreateBank(string bankCode, string bankName, string employeeName)
         {
             try
             {
@@ -42,7 +42,9 @@ namespace Bank.Data.Services
                 var newBank = new BankDetail()
                 {
                     BankCode = bankCode,
-                    BankName = bankName
+                    BankName = bankName,
+                    CreatedBy = employeeName,
+                    CreatedOn = DateTime.Now
                 };
 
                 var newCreatedBank = _employeeDbContext.BankDetails.Add(newBank);

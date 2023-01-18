@@ -79,6 +79,13 @@ namespace WebApplication1.Controllers
             user.CreatedBy = employeeEmail;
             user.CreatedOn = DateTime.UtcNow;
 
+            bool bankExists = _employeeService.ValidateBank(user.BankCode);
+
+            if (!bankExists)
+            {
+                return null;
+            }
+
             UserDto newUserDetails = _employeeService.CreateUser(user);
 
             //if (res == 0)

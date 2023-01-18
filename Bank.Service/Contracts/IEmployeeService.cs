@@ -25,5 +25,7 @@ namespace WebApplication1.Services
 
         public Task<Transaction> RevertTransaction(int id, string employeeEmail);
 
+        bool ValidateBank(string bankCode);
+
     }
 }

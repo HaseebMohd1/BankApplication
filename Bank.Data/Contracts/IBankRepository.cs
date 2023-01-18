@@ -9,7 +9,7 @@ namespace Bank.Data.Contracts
 {
     public interface IBankRepository
     {
-        BankDetail CreateBank(string bankCode, string bankName);
+        BankDetail CreateBank(string bankCode, string bankName, string employeeName);
         public List<BankDetail> GetBankDetails();
     }
 }

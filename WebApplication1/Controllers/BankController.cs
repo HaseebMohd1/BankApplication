@@ -1,4 +1,5 @@
-﻿using Bank.Models;
+﻿using System.Security.Claims;
+using Bank.Models;
 using Bank.Models.ViewModel;
 using Bank.Service.Contracts;
 using Microsoft.AspNetCore.Authorization;
@@ -13,9 +14,12 @@ namespace Bank.Controllers
     {
         private readonly IBankService _bankService;
 
-        public BankController(IBankService bankService)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public BankController(IBankService bankService, IHttpContextAccessor httpContextAccessor)
         {
             _bankService = bankService;
+            _httpContextAccessor = httpContextAccessor; 
         }
 
         [HttpGet]
@@ -28,7 +32,12 @@ namespace Bank.Controllers
         [HttpPost, Authorize(Roles = "SuperAdmin")]
         public async Task<ActionResult<BankDetail>> CreateBank([FromBody] CreateBank createBankDetails)
         {
-            var res = _bankService.CreateBank(createBankDetails);
+
+            string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
+            Console.WriteLine(employeeEmail);
+
+            var res = _bankService.CreateBank(createBankDetails, employeeEmail);
 
             return Ok(res);
         }

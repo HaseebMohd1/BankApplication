@@ -29,7 +29,7 @@ namespace Bank.Service.Services
 
         }
 
-        public BankDetail CreateBank(CreateBank createBankDetails)
+        public BankDetail CreateBank(CreateBank createBankDetails, string employeeName)
         {
             string bankCode = createBankDetails.BankCode;
             string bankName = createBankDetails.BankName;
@@ -41,7 +41,7 @@ namespace Bank.Service.Services
 
             // Here, have to verify if the BankCode alreay exists or not before moving ahead
 
-            BankDetail newBankDetails =  _bankRepository.CreateBank(bankCode, bankName);
+            BankDetail newBankDetails =  _bankRepository.CreateBank(bankCode, bankName, employeeName);
 
             return newBankDetails;
 

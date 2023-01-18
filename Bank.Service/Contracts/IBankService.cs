@@ -12,6 +12,6 @@ namespace Bank.Service.Contracts
     {
         public List<BankDetail> GetBanks();
 
-        BankDetail CreateBank(CreateBank createBankDetails);
+        BankDetail CreateBank(CreateBank createBankDetails, string employeeName);
     }
 }
