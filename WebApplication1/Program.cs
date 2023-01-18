@@ -1,4 +1,8 @@
 using System.Text;
+using Bank.Data.Contracts;
+using Bank.Data.Services;
+using Bank.Service.Contracts;
+using Bank.Service.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -56,6 +60,7 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBankRepository, BankRepository>();
 
 
 
@@ -63,6 +68,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IBankService, BankService>();
 
 // for Automapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
