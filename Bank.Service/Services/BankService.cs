@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bank.Data.Contracts;
+﻿using Bank.Data.Contracts;
 using Bank.Models;
 using Bank.Models.ViewModel;
 using Bank.Service.Contracts;
@@ -40,6 +35,8 @@ namespace Bank.Service.Services
             }
 
             // Here, have to verify if the BankCode alreay exists or not before moving ahead
+            
+
 
             BankDetail newBankDetails =  _bankRepository.CreateBank(bankCode, bankName, employeeName);
 

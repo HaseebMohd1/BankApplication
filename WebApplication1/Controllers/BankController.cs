@@ -5,6 +5,7 @@ using Bank.Service.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Services;
 
 namespace Bank.Controllers
 {
@@ -16,10 +17,14 @@ namespace Bank.Controllers
 
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public BankController(IBankService bankService, IHttpContextAccessor httpContextAccessor)
+        private readonly IEmployeeService _employeeService;
+
+      
+        public BankController(IBankService bankService, IHttpContextAccessor httpContextAccessor, IEmployeeService employeeService)
         {
             _bankService = bankService;
-            _httpContextAccessor = httpContextAccessor; 
+            _httpContextAccessor = httpContextAccessor;
+            _employeeService = employeeService;
         }
 
         [HttpGet]
@@ -30,12 +35,19 @@ namespace Bank.Controllers
         }
 
         [HttpPost, Authorize(Roles = "SuperAdmin")]
-        public async Task<ActionResult<BankDetail>> CreateBank([FromBody] CreateBank createBankDetails)
+        public async Task<ActionResult<string>> CreateBank([FromBody] CreateBank createBankDetails)
         {
 
             string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
             Console.WriteLine(employeeEmail);
+
+            bool isBankAlreadyExists = _employeeService.ValidateBank(createBankDetails.BankCode);
+
+            if(isBankAlreadyExists)
+            {
+                return BadRequest($"Bank Already Exists with Bank Code => {createBankDetails.BankCode}!!!");
+            }
 
             var res = _bankService.CreateBank(createBankDetails, employeeEmail);
 

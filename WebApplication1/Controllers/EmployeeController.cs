@@ -70,7 +70,7 @@ namespace WebApplication1.Controllers
 
 
         [HttpPost("createUser"), Authorize(Roles = "Admin,SuperAdmin")]
-        public async Task<UserDto> CreateUser(User user)
+        public async Task<ActionResult<string>> CreateUser(User user)
         {
             // int res = await employeeRepository.CreateUser(user);
 
@@ -83,7 +83,7 @@ namespace WebApplication1.Controllers
 
             if (!bankExists)
             {
-                return null;
+                return BadRequest("This Bank doesn't exits. Please enter valid Bank Code");
             }
 
             UserDto newUserDetails = _employeeService.CreateUser(user);
@@ -93,7 +93,9 @@ namespace WebApplication1.Controllers
             //    return null;
             //}
 
-            return newUserDetails;
+            string successMessage = $"Name : {newUserDetails.UserName}\n\tEmail : {newUserDetails.UserEmail}\n\tAccount Number : {newUserDetails.AccountNumber}";
+
+            return Ok($"User Succesfully Created : -> \n\t {successMessage}");
 
           // return user;
 
