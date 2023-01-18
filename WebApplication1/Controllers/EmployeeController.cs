@@ -69,7 +69,7 @@ namespace WebApplication1.Controllers
 
 
 
-        [HttpPost, Authorize(Roles = "Admin,SuperAdmin")]
+        [HttpPost("createUser"), Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<UserDto> CreateUser(User user)
         {
             // int res = await employeeRepository.CreateUser(user);

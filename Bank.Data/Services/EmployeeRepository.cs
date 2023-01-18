@@ -23,8 +23,6 @@ namespace WebApplication1.Repository
             _dbContext = dbContext;
             _mapper = mapper;
             _repository = repository;
-
-            
         }
 
         public async Task<List<UserDto>> GetUsers()
@@ -294,9 +292,6 @@ namespace WebApplication1.Repository
                 throw new Exception("Incorrect Transaction ID");
             }
 
-
-            
-            
         }
 
         public Task<Transaction> RevertTransaction(int transactionId, string employeeName)
