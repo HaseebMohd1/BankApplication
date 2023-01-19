@@ -12,8 +12,21 @@ using Swashbuckle.AspNetCore.Filters;
 using WebApplication1.Models.AppDbContext;
 using WebApplication1.Repository;
 using WebApplication1.Services;
+using ExceptionHandler;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+
+
+// Addidng Log Feature
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
+// Adding Custom Exception Middleware
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+
 
 // Add services to the container.
 
@@ -84,10 +97,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     // test : Exceptional Handling
-    app.UseDeveloperExceptionPage();
+    //app.UseDeveloperExceptionPage();
 }
 
+
+// adding custom middleware for Exception Handling
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
 app.UseAuthentication();
+
+
 
 app.UseAuthorization();
 

@@ -1,0 +1,12 @@
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\bin\Debug\net6.0\ExceptionHandler.deps.json
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\bin\Debug\net6.0\ExceptionHandler.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\bin\Debug\net6.0\ExceptionHandler.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\obj\Debug\net6.0\ExceptionHandler.csproj.AssemblyReference.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\obj\Debug\net6.0\ExceptionHandler.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\obj\Debug\net6.0\ExceptionHandler.AssemblyInfoInputs.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\obj\Debug\net6.0\ExceptionHandler.AssemblyInfo.cs
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\obj\Debug\net6.0\ExceptionHandler.csproj.CoreCompileInputs.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\obj\Debug\net6.0\ExceptionHandler.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\obj\Debug\net6.0\refint\ExceptionHandler.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\obj\Debug\net6.0\ExceptionHandler.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\ExceptionHandler\obj\Debug\net6.0\ref\ExceptionHandler.dll

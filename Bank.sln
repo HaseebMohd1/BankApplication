@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank", "WebApplication1\Ban
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Models", "Bank.Models\Bank.Models.csproj", "{6AE9E162-1FC6-425F-A0DA-DF1231A49CF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Data", "Bank.Data\Bank.Data.csproj", "{984A10C7-5C2B-40FC-BB5F-71D0D60EF891}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Data", "Bank.Data\Bank.Data.csproj", "{984A10C7-5C2B-40FC-BB5F-71D0D60EF891}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Service", "Bank.Service\Bank.Service.csproj", "{28407E19-4EF0-4AD5-9F30-FB42C88F2EB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Service", "Bank.Service\Bank.Service.csproj", "{28407E19-4EF0-4AD5-9F30-FB42C88F2EB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionHandler", "ExceptionHandler\ExceptionHandler.csproj", "{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{28407E19-4EF0-4AD5-9F30-FB42C88F2EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28407E19-4EF0-4AD5-9F30-FB42C88F2EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28407E19-4EF0-4AD5-9F30-FB42C88F2EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
