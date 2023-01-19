@@ -31,5 +31,8 @@ namespace WebApplication1.Repository
         //public User GetUserDetailsById(int userId);
 
         public Task<UserDto> UpdateUserNew(int id, User user);
+
+        bool GetBank(string bankCode);
+
     }
 }

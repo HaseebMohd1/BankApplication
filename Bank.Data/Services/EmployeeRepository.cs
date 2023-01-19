@@ -414,5 +414,19 @@ namespace WebApplication1.Repository
             return newEmployee;
         }
 
+
+        public bool GetBank(string bankCode)
+        {
+
+            var bankCodeFromDb = _dbContext.BankDetails.Where(b => b.BankCode == bankCode).Select(b => b.BankCode).FirstOrDefault();
+
+            if(bankCodeFromDb == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

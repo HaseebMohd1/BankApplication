@@ -16,5 +16,7 @@ namespace WebApplication1.Models.AppDbContext
         public DbSet<Transaction> Transactions { get; set; }
 
         public DbSet<Currency> Currencies { get; set; }
+
+        public DbSet<BankDetail> BankDetails { get; set; }
     }
 }

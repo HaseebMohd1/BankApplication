@@ -354,5 +354,15 @@ namespace WebApplication1.Services
             return res;
         }
 
+
+        public bool ValidateBank(string bankCode)
+        {
+            var res = _employeeRepository.GetBank(bankCode);
+
+            
+
+            return res;
+        }
+
     }
 }
