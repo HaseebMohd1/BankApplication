@@ -27,5 +27,7 @@ namespace WebApplication1.Services
 
         bool ValidateBank(string bankCode);
 
+        UserDto CreateUserNew(UserCreate userCreateDetails, string employeeName);
+
     }
 }

@@ -139,7 +139,68 @@ namespace WebApplication1.Services
 
         }
 
-     
+        
+        public UserDto CreateUserNew(UserCreate userCreateDetails, string employeeName)
+        {
+
+            var user = _repository.GetUserByEmail(userCreateDetails.UserEmail);
+
+            if (user != null)
+            {
+                throw new Exception("User already exists with this Email. Please try with other Email.");
+            }
+
+
+            // Password Hashing using SHA256
+            string randomSalt = GenerateRandomSalt();
+
+            string hashedPassword = CreatePasswordHashUsingSha256(userCreateDetails.Password + randomSalt);
+
+            // create unique user id
+            string subString = userCreateDetails.UserName.Substring(0, 4).ToLower();
+
+            string dateString = DateTime.Now.ToString("yyMMddHHmmssff");
+
+
+            User newUser = new User()
+            {
+                UserName = userCreateDetails.UserName,
+                UserEmail = userCreateDetails.UserEmail,
+                UserPassword = hashedPassword,
+                PasswordSalt = randomSalt,
+                UserPhone = userCreateDetails.UserPhone,
+                BankCode = userCreateDetails.BankCode,
+                BankName = userCreateDetails.BankName,
+                UniqueUserId = subString + dateString,
+                AccountNumber = subString + userCreateDetails.BankCode.ToLower() + dateString,
+                CreatedBy = employeeName,
+                CreatedOn = DateTime.Now,
+                Amount = userCreateDetails.Amount
+
+            };
+
+            var res = _employeeRepository.CreateUser(newUser);
+
+            if (res  == Task.FromResult(0))
+            {
+                throw new Exception("User Registration Failed => EmployeeService");
+            }
+
+            var newUserDetails = new UserDto
+            {
+                UserName = newUser.UserName,
+                UserEmail = newUser.UserEmail,
+                UserPhone = newUser.UserPhone,
+                BankCode = newUser.BankCode,
+                BankName = newUser.BankName,
+                AccountNumber = newUser.AccountNumber
+
+            };
+
+            return newUserDetails;
+        }
+
+
         private void CreatePasswordHash(string password, out string passwordSalt, out string passwordHash)
         {
             //byte[] key = new byte[32];
