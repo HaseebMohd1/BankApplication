@@ -83,6 +83,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    // test : Exceptional Handling
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseAuthentication();
