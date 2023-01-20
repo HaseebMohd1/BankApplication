@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Data", "Bank.Data\Bank
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Service", "Bank.Service\Bank.Service.csproj", "{28407E19-4EF0-4AD5-9F30-FB42C88F2EB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionHandler", "ExceptionHandler\ExceptionHandler.csproj", "{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExceptionHandler", "ExceptionHandler\ExceptionHandler.csproj", "{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

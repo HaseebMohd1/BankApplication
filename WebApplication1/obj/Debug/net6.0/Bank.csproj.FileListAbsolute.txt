@@ -102,3 +102,5 @@ C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\obj\Debug\net6.0\
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\Scrutor.dll
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.dll
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\ExceptionHandler.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\ExceptionHandler.pdb
