@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Bank.Data.Contracts;
+﻿using Bank.Data.Contracts;
+using Bank.LoggerService;
 using Bank.Models;
 using WebApplication1.Models.AppDbContext;
 
@@ -13,9 +8,12 @@ namespace Bank.Data.Services
     public class BankRepository : IBankRepository
     {
         private readonly EmployeeDbContext _employeeDbContext;
-        public BankRepository(EmployeeDbContext employeeDbContext)
+        private readonly ILog _logger;
+
+        public BankRepository(EmployeeDbContext employeeDbContext, ILog logger)
         {
             _employeeDbContext = employeeDbContext;
+            _logger = logger;
         }
 
         
@@ -24,13 +22,16 @@ namespace Bank.Data.Services
         {
             try
             {
+                _logger.Information("Inside the BankRepository to fetch List of all Banks from `BankDetails` Table");
                 List<BankDetail> bankDetails = _employeeDbContext.BankDetails.ToList();
                 return bankDetails;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception("Error occured while fetching data of all banks!");
+                _logger.Error("Error while fetching the list of all Banks form Database in the Data Layers(Repository)");
+                throw;
             }
+            
            
         }
 

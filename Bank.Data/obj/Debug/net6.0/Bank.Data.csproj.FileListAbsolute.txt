@@ -15,3 +15,6 @@ C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\obj\Debug\net6.0\refint
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\obj\Debug\net6.0\Bank.Data.pdb
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\obj\Debug\net6.0\Bank.Data.genruntimeconfig.cache
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\obj\Debug\net6.0\ref\Bank.Data.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\bin\Debug\net6.0\LoggerService\nlog.config
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\bin\Debug\net6.0\Bank.Infrastructure.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Data\bin\Debug\net6.0\Bank.Infrastructure.pdb

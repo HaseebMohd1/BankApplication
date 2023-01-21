@@ -21,17 +21,9 @@ var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 
-// Addidng Log Feature
-//builder.Logging.ClearProviders();
-//builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
-//builder.Logging.AddConsole();
-//builder.Logging.AddDebug();
-//builder.Logging.AddEventSourceLogger();
 
 // Adding Custom Exception Middleware
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
-
-
 
 
 builder.Services.AddControllers();

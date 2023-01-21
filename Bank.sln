@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank.Service", "Bank.Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExceptionHandler", "ExceptionHandler\ExceptionHandler.csproj", "{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Infrastructure", "Bank.Infrastructure\Bank.Infrastructure.csproj", "{43647AB0-7C2E-4A9E-B44B-BD6BCE01969A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA6B857C-F6AE-42FA-86EC-B71CC9AAED5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43647AB0-7C2E-4A9E-B44B-BD6BCE01969A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43647AB0-7C2E-4A9E-B44B-BD6BCE01969A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43647AB0-7C2E-4A9E-B44B-BD6BCE01969A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43647AB0-7C2E-4A9E-B44B-BD6BCE01969A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

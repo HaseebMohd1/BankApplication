@@ -2747,6 +2747,7 @@
         "dependencies": {
           "AutoMapper": "12.0.0",
           "BCrypt.Net-Next": "4.0.3",
+          "Bank.Infrastructure": "1.0.0",
           "Bank.Models": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.1",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.1",
@@ -2757,6 +2758,22 @@
         },
         "runtime": {
           "bin/placeholder/Bank.Data.dll": {}
+        }
+      },
+      "Bank.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "NLog": "5.1.1",
+          "NLog.Appsettings.Standard": "2.1.0",
+          "NLog.Extensions.Logging": "5.2.1",
+          "NLog.Web.AspNetCore": "5.2.1"
+        },
+        "compile": {
+          "bin/placeholder/Bank.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Bank.Infrastructure.dll": {}
         }
       },
       "Bank.Models/1.0.0": {
@@ -2777,7 +2794,8 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
-          "Bank.Data": "1.0.0"
+          "Bank.Data": "1.0.0",
+          "Bank.Infrastructure": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Bank.Service.dll": {}
@@ -8300,6 +8318,11 @@
       "type": "project",
       "path": "../Bank.Data/Bank.Data.csproj",
       "msbuildProject": "../Bank.Data/Bank.Data.csproj"
+    },
+    "Bank.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Bank.Infrastructure/Bank.Infrastructure.csproj",
+      "msbuildProject": "../Bank.Infrastructure/Bank.Infrastructure.csproj"
     },
     "Bank.Models/1.0.0": {
       "type": "project",

@@ -1,0 +1,13 @@
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\bin\Debug\net6.0\LoggerService\nlog.config
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\bin\Debug\net6.0\Bank.Infrastructure.deps.json
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\bin\Debug\net6.0\Bank.Infrastructure.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\bin\Debug\net6.0\Bank.Infrastructure.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\obj\Debug\net6.0\Bank.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\obj\Debug\net6.0\Bank.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\obj\Debug\net6.0\Bank.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\obj\Debug\net6.0\Bank.Infrastructure.AssemblyInfo.cs
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\obj\Debug\net6.0\Bank.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\obj\Debug\net6.0\Bank.Infrastructure.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\obj\Debug\net6.0\refint\Bank.Infrastructure.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\obj\Debug\net6.0\Bank.Infrastructure.pdb
+C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\obj\Debug\net6.0\ref\Bank.Infrastructure.dll

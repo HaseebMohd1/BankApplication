@@ -38,12 +38,14 @@ namespace Bank.Controllers
         {
             var res = _bankService.GetBanks();
 
-            _logger.Information("Information is logged");
-            _logger.Warning("Warning is logged");
-            _logger.Debug("Debug log is logged");
-            _logger.Error("Error is logged");
 
-            //_logger.LogInformation("GET Request : To get all banks", 10);
+
+            //_logger.Information("Information is logged after creating  Infra Service");
+            //_logger.Warning("Warning is logged after creating  Infra Service");
+            //_logger.Debug("Debug log is logged after creating  Infra Service");
+            //_logger.Error("Error is logged after creating  Infra Service");
+
+            _logger.Information("GET Request : To get all banks. Inside GetAllBanks() Controller");
 
             return Ok(res);
         }
@@ -56,7 +58,7 @@ namespace Bank.Controllers
 
             string employeeEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
-            //_logger.LogInformation("POST Request : Create a new Bank by {employeeEmail}", employeeEmail);
+            _logger.Information($"POST Request : Create a new Bank by {employeeEmail}");
 
             Console.WriteLine(employeeEmail);
 
@@ -66,13 +68,13 @@ namespace Bank.Controllers
 
             if(isBankAlreadyExists)
             {
-                //_logger.LogError("Bank with Code {bankCodeToBeCreated} already exists. So cannot create a new one with same code.", bankCodeToBeCreated);
+                _logger.Error($"Bank with Code {bankCodeToBeCreated} already exists. So cannot create a new one with same code.");
                 return BadRequest($"Bank Already Exists with Bank Code => {createBankDetails.BankCode}!!!");
             }
 
             var res = _bankService.CreateBank(createBankDetails, employeeEmail);
 
-            //_logger.LogInformation("Successfully Created a Bank with Code : {bankCodeToBeCreated} and created by {employeeEmail}", bankCodeToBeCreated, employeeEmail);
+            _logger.Information($"Successfully Created a Bank with Code : {bankCodeToBeCreated} and created by {employeeEmail}");
 
             return Ok(res);
         }

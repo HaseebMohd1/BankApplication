@@ -10,6 +10,7 @@
         "dependencies": {
           "AutoMapper": "12.0.0",
           "BCrypt.Net-Next": "4.0.3",
+          "Bank.Infrastructure": "1.0.0",
           "Bank.Models": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.1",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.1",
@@ -248,6 +249,11 @@
           }
         }
       },
+      "Microsoft.Extensions.Configuration/2.1.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "7.0.0"
+        }
+      },
       "Microsoft.Extensions.Configuration.Abstractions/7.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "7.0.0"
@@ -257,6 +263,19 @@
             "assemblyVersion": "7.0.0.0",
             "fileVersion": "7.0.22.51805"
           }
+        }
+      },
+      "Microsoft.Extensions.Configuration.FileExtensions/2.1.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "2.1.1",
+          "Microsoft.Extensions.FileProviders.Physical": "2.1.1"
+        }
+      },
+      "Microsoft.Extensions.Configuration.Json/2.1.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "2.1.1",
+          "Microsoft.Extensions.Configuration.FileExtensions": "2.1.1",
+          "Newtonsoft.Json": "11.0.2"
         }
       },
       "Microsoft.Extensions.DependencyInjection/7.0.0": {
@@ -290,6 +309,18 @@
           }
         }
       },
+      "Microsoft.Extensions.FileProviders.Abstractions/2.1.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "7.0.0"
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Physical/2.1.1": {
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.1.1",
+          "Microsoft.Extensions.FileSystemGlobbing": "2.1.1"
+        }
+      },
+      "Microsoft.Extensions.FileSystemGlobbing/2.1.1": {},
       "Microsoft.Extensions.Logging/7.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
@@ -468,6 +499,58 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {
             "assemblyVersion": "2.2.0.0",
             "fileVersion": "2.2.1.1"
+          }
+        }
+      },
+      "Newtonsoft.Json/11.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.0.2.21924"
+          }
+        }
+      },
+      "NLog/5.1.1": {
+        "runtime": {
+          "lib/netstandard2.0/NLog.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.1.1522"
+          }
+        }
+      },
+      "NLog.Appsettings.Standard/2.1.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Json": "2.1.1",
+          "NLog": "5.1.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/NLog.Appsettings.Standard.dll": {
+            "assemblyVersion": "2.1.0.0",
+            "fileVersion": "2.1.0.0"
+          }
+        }
+      },
+      "NLog.Extensions.Logging/5.2.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
+          "Microsoft.Extensions.Logging": "7.0.0",
+          "NLog": "5.1.1"
+        },
+        "runtime": {
+          "lib/net6.0/NLog.Extensions.Logging.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.2.1.300"
+          }
+        }
+      },
+      "NLog.Web.AspNetCore/5.2.1": {
+        "dependencies": {
+          "NLog.Extensions.Logging": "5.2.1"
+        },
+        "runtime": {
+          "lib/net6.0/NLog.Web.AspNetCore.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.2.1.786"
           }
         }
       },
@@ -722,6 +805,17 @@
           }
         }
       },
+      "Bank.Infrastructure/1.0.0": {
+        "dependencies": {
+          "NLog": "5.1.1",
+          "NLog.Appsettings.Standard": "2.1.0",
+          "NLog.Extensions.Logging": "5.2.1",
+          "NLog.Web.AspNetCore": "5.2.1"
+        },
+        "runtime": {
+          "Bank.Infrastructure.dll": {}
+        }
+      },
       "Bank.Models/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3"
@@ -864,12 +958,33 @@
       "path": "microsoft.extensions.caching.memory/7.0.0",
       "hashPath": "microsoft.extensions.caching.memory.7.0.0.nupkg.sha512"
     },
+    "Microsoft.Extensions.Configuration/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LjVKO6P2y52c5ZhTLX/w8zc5H4Y3J/LJsgqTBj49TtFq/hAtVNue/WA0F6/7GMY90xhD7K0MDZ4qpOeWXbLvzg==",
+      "path": "microsoft.extensions.configuration/2.1.1",
+      "hashPath": "microsoft.extensions.configuration.2.1.1.nupkg.sha512"
+    },
     "Microsoft.Extensions.Configuration.Abstractions/7.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-f34u2eaqIjNO9YLHBz8rozVZ+TcFiFs0F3r7nUJd7FRkVSxk8u4OpoK226mi49MwexHOR2ibP9MFvRUaLilcQQ==",
       "path": "microsoft.extensions.configuration.abstractions/7.0.0",
       "hashPath": "microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.FileExtensions/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CDk5CwG0YzlRgvl65J0iK6ahrX12yMRrEat3yVTXjWC+GN9Jg9zHZu2IE4cQIPAMA/IiAI5KjgL08fhP3fPCkw==",
+      "path": "microsoft.extensions.configuration.fileextensions/2.1.1",
+      "hashPath": "microsoft.extensions.configuration.fileextensions.2.1.1.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Json/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IFpONpvdhVEE3S3F4fTYkpT/GyIHtumy2m0HniQanJ80Pj/pUF3Z4wjrHEp1G78rPD+WTo5fRlhdJfuU1Tv2GQ==",
+      "path": "microsoft.extensions.configuration.json/2.1.1",
+      "hashPath": "microsoft.extensions.configuration.json.2.1.1.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection/7.0.0": {
       "type": "package",
@@ -891,6 +1006,27 @@
       "sha512": "sha512-oONNYd71J3LzkWc4fUHl3SvMfiQMYUCo/mDHDEu76hYYxdhdrPYv6fvGv9nnKVyhE9P0h20AU8RZB5OOWQcAXg==",
       "path": "microsoft.extensions.dependencymodel/7.0.0",
       "hashPath": "microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Abstractions/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UEQB5/QPuLYaCvScZQ9llhcks5xyEUKh41D615FoehRAF9UgGVmXHcCSOH8idHHLRoKm+OJJjEy1oywvuaL33w==",
+      "path": "microsoft.extensions.fileproviders.abstractions/2.1.1",
+      "hashPath": "microsoft.extensions.fileproviders.abstractions.2.1.1.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Physical/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kVCvLm1ePchUgRrQZrno07Mn6knDAzR7vl6eRaI/fem0u6ODg+RTwOYLs4XL39Ttuu+BzEwqzHu3DtDgXT8+vQ==",
+      "path": "microsoft.extensions.fileproviders.physical/2.1.1",
+      "hashPath": "microsoft.extensions.fileproviders.physical.2.1.1.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileSystemGlobbing/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4QDzyCN8cJnThY6mK9SnzovyCZ8KCG9jmC9KqHfFGtazJvmNZP1gcyBkPmqMjP0qwbmEUUyqyA9LLn3FrYXTGw==",
+      "path": "microsoft.extensions.filesystemglobbing/2.1.1",
+      "hashPath": "microsoft.extensions.filesystemglobbing.2.1.1.nupkg.sha512"
     },
     "Microsoft.Extensions.Logging/7.0.0": {
       "type": "package",
@@ -1017,6 +1153,41 @@
       "sha512": "sha512-KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
+    },
+    "Newtonsoft.Json/11.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+      "path": "newtonsoft.json/11.0.2",
+      "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
+    },
+    "NLog/5.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YBfUDzipCaucs+8ieCDp8XECumiWsQbZwSUVLlt9i7FGV03nOPqoVzLtmlhbTxq4TN92BBsLacqPAE/ZyDDJ1g==",
+      "path": "nlog/5.1.1",
+      "hashPath": "nlog.5.1.1.nupkg.sha512"
+    },
+    "NLog.Appsettings.Standard/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sUn2bOE2N++rtdRVEa+goRGNxxnsFdCGYIII2+0nW52Xu9NmVId8aJZRz1IAHASf5RoFmE6sjSecHJkfBekPaA==",
+      "path": "nlog.appsettings.standard/2.1.0",
+      "hashPath": "nlog.appsettings.standard.2.1.0.nupkg.sha512"
+    },
+    "NLog.Extensions.Logging/5.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-b16cdOklZ3gfeuiyewsAmR2It/55Ar+plwsyo7CjgfwZtH1c5B2ZyYIGt1Ho+fPMOKEHkPU/trXZqAg9Oipiiw==",
+      "path": "nlog.extensions.logging/5.2.1",
+      "hashPath": "nlog.extensions.logging.5.2.1.nupkg.sha512"
+    },
+    "NLog.Web.AspNetCore/5.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yusksFxJxIoXJbU/aH9IJHmNKNNk2a9hYLSzd02kr7EX3Oc2+IRpp50VUEwZpq0tWEdlqYOUCLlzLMtHDHkxSA==",
+      "path": "nlog.web.aspnetcore/5.2.1",
+      "hashPath": "nlog.web.aspnetcore.5.2.1.nupkg.sha512"
     },
     "System.Buffers/4.5.1": {
       "type": "package",
@@ -1227,6 +1398,11 @@
       "sha512": "sha512-c1ho9WU9ZxMZawML+ssPKZfdnrg/OjR3pe0m9v8230z3acqphwvPJqzAkH54xRYm5ntZHGG1EPP3sux9H3qSPg==",
       "path": "system.windows.extensions/5.0.0",
       "hashPath": "system.windows.extensions.5.0.0.nupkg.sha512"
+    },
+    "Bank.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Bank.Models/1.0.0": {
       "type": "project",

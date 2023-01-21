@@ -10,3 +10,20 @@
 2023-01-22 00:23:29.2964 WARN Warning is logged
 2023-01-22 00:23:29.2964 DEBUG Debug log is logged
 2023-01-22 00:23:29.3008 ERROR Error is logged
+2023-01-22 00:33:37.3501 INFO Information is logged
+2023-01-22 00:33:37.3880 WARN Warning is logged
+2023-01-22 00:33:37.3880 DEBUG Debug log is logged
+2023-01-22 00:33:37.3880 ERROR Error is logged
+2023-01-22 00:34:53.7432 INFO Information is logged after creating  Infra Service
+2023-01-22 00:34:53.7432 WARN Warning is logged after creating  Infra Service
+2023-01-22 00:34:53.7432 DEBUG Debug log is logged after creating  Infra Service
+2023-01-22 00:34:53.7432 ERROR Error is logged after creating  Infra Service
+2023-01-22 01:02:55.5993 INFO Inside Bank.Servie to Fetch list of All Banks
+2023-01-22 01:02:55.7146 INFO Inside the BankRepository to fetch List of all Banks from `BankDetails` Table
+2023-01-22 01:03:00.1911 INFO List of Banks Successfully fetched from Bank.Data Layer and sent to Bank Controller
+2023-01-22 01:03:00.1911 INFO Information is logged after creating  Infra Service
+2023-01-22 01:03:00.1911 WARN Warning is logged after creating  Infra Service
+2023-01-22 01:03:00.1911 DEBUG Debug log is logged after creating  Infra Service
+2023-01-22 01:03:00.1911 ERROR Error is logged after creating  Infra Service
+2023-01-22 01:28:38.2296 INFO POST Request : Create a new Bank by test@superadmin.com
+2023-01-22 01:28:38.6431 INFO Successfully Created a Bank with Code : Demo and created by test@superadmin.com

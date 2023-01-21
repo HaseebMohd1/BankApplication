@@ -109,3 +109,6 @@ C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\NLog.Appsettings.Standard.dll
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\NLog.Extensions.Logging.dll
 C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\LoggerService\nlog.config
+C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\Bank.Infrastructure.dll
+C:\Users\haseeb.m\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\Bank.Infrastructure.pdb

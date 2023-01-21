@@ -6,4 +6,23 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="LoggerService\nlog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="LoggerService\nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NLog" Version="5.1.1" />
+    <PackageReference Include="NLog.Appsettings.Standard" Version="2.1.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.2.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
+  </ItemGroup>
+
 </Project>
