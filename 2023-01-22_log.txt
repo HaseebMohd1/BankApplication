@@ -1,0 +1,12 @@
+2023-01-22 00:22:45.4804 INFO Information is logged
+2023-01-22 00:22:45.5218 WARN Warning is logged
+2023-01-22 00:22:45.5344 DEBUG Debug log is logged
+2023-01-22 00:22:45.5344 ERROR Error is logged
+2023-01-22 00:23:26.1500 INFO Information is logged
+2023-01-22 00:23:26.1500 WARN Warning is logged
+2023-01-22 00:23:26.1500 DEBUG Debug log is logged
+2023-01-22 00:23:26.1500 ERROR Error is logged
+2023-01-22 00:23:29.2964 INFO Information is logged
+2023-01-22 00:23:29.2964 WARN Warning is logged
+2023-01-22 00:23:29.2964 DEBUG Debug log is logged
+2023-01-22 00:23:29.3008 ERROR Error is logged

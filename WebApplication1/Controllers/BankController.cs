@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Bank.LoggerService;
 using Bank.Models;
 using Bank.Models.ViewModel;
 using Bank.Service.Contracts;
@@ -18,16 +19,18 @@ namespace Bank.Controllers
 
         private readonly IEmployeeService _employeeService;
 
-        private readonly ILogger _logger;
+        private readonly ILog _logger;
 
-        public BankController(IBankService bankService, IHttpContextAccessor httpContextAccessor, IEmployeeService employeeService, ILogger<BankController> logger)
+
+
+        public BankController(IBankService bankService, IHttpContextAccessor httpContextAccessor, IEmployeeService employeeService, ILog logger)
         {
             _bankService = bankService;
             _httpContextAccessor = httpContextAccessor;
             _employeeService = employeeService;
             _logger = logger;
 
-            _logger.LogInformation("Inside the Bank Controller");
+            //_logger.LogInformation("Inside the Bank Controller");
         }
 
         [HttpGet]
@@ -35,7 +38,12 @@ namespace Bank.Controllers
         {
             var res = _bankService.GetBanks();
 
-            _logger.LogInformation("GET Request : To get all banks", 10);
+            _logger.Information("Information is logged");
+            _logger.Warning("Warning is logged");
+            _logger.Debug("Debug log is logged");
+            _logger.Error("Error is logged");
+
+            //_logger.LogInformation("GET Request : To get all banks", 10);
 
             return Ok(res);
         }
@@ -48,7 +56,7 @@ namespace Bank.Controllers
 
             string employeeEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
-            _logger.LogInformation("POST Request : Create a new Bank by {employeeEmail}", employeeEmail);
+            //_logger.LogInformation("POST Request : Create a new Bank by {employeeEmail}", employeeEmail);
 
             Console.WriteLine(employeeEmail);
 
@@ -58,13 +66,13 @@ namespace Bank.Controllers
 
             if(isBankAlreadyExists)
             {
-                _logger.LogError("Bank with Code {bankCodeToBeCreated} already exists. So cannot create a new one with same code.", bankCodeToBeCreated);
+                //_logger.LogError("Bank with Code {bankCodeToBeCreated} already exists. So cannot create a new one with same code.", bankCodeToBeCreated);
                 return BadRequest($"Bank Already Exists with Bank Code => {createBankDetails.BankCode}!!!");
             }
 
             var res = _bankService.CreateBank(createBankDetails, employeeEmail);
 
-            _logger.LogInformation("Successfully Created a Bank with Code : {bankCodeToBeCreated} and created by {employeeEmail}", bankCodeToBeCreated, employeeEmail);
+            //_logger.LogInformation("Successfully Created a Bank with Code : {bankCodeToBeCreated} and created by {employeeEmail}", bankCodeToBeCreated, employeeEmail);
 
             return Ok(res);
         }

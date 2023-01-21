@@ -3,7 +3,6 @@ using Bank.Data.Contracts;
 using Bank.Data.Services;
 using Bank.Service.Contracts;
 using Bank.Service.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,26 +12,35 @@ using WebApplication1.Models.AppDbContext;
 using WebApplication1.Repository;
 using WebApplication1.Services;
 using ExceptionHandler;
-
+using NLog;
+using Microsoft.AspNetCore.HttpOverrides;
+using Bank.LoggerService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 
 // Addidng Log Feature
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
+//builder.Logging.ClearProviders();
+//builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
+//builder.Logging.AddConsole();
+//builder.Logging.AddDebug();
+//builder.Logging.AddEventSourceLogger();
 
 // Adding Custom Exception Middleware
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 
 
-// Add services to the container.
+
 
 builder.Services.AddControllers();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+
 
 
 // adding HttpContextAccessor
@@ -86,6 +94,9 @@ builder.Services.AddScoped<IBankService, BankService>();
 // for Automapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
+// for Logging
+builder.Services.AddSingleton<ILog, LogNLog>();
+
 
 
 
@@ -99,6 +110,15 @@ if (app.Environment.IsDevelopment())
     // test : Exceptional Handling
     //app.UseDeveloperExceptionPage();
 }
+else
+    app.UseHsts();
+
+
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.All
+});
 
 
 // adding custom middleware for Exception Handling
@@ -106,7 +126,7 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseAuthentication();
 
-
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 

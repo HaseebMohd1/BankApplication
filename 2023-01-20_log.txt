@@ -1,0 +1,4 @@
+2023-01-20 16:04:03.2048 INFO Information is logged
+2023-01-20 16:04:03.3036 WARN Warning is logged
+2023-01-20 16:04:03.3036 DEBUG Debug log is logged
+2023-01-20 16:04:03.3036 ERROR Error is logged
