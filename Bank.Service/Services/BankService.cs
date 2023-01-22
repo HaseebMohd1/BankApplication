@@ -1,5 +1,4 @@
 ﻿using Bank.Data.Contracts;
-using Bank.LoggerService;
 using Bank.Models;
 using Bank.Models.ViewModel;
 using Bank.Service.Contracts;
@@ -10,12 +9,10 @@ namespace Bank.Service.Services
     public class BankService : IBankService
     {
         private readonly IBankRepository _bankRepository;
-        private readonly ILog _logger;
 
-        public BankService(IBankRepository bankRepository, ILog logger)
+        public BankService(IBankRepository bankRepository)
         {
             _bankRepository = bankRepository;
-            _logger = logger;
         }
 
 
@@ -23,19 +20,19 @@ namespace Bank.Service.Services
         {
             try
             {
-                _logger.Information("Inside Bank.Servie to Fetch list of All Banks");
+                //_logger.Information("Inside Bank.Servie to Fetch list of All Banks");
                 var res = _bankRepository.GetBankDetails();
                 if(res== null)
                 {
-                    _logger.Warning("List of Hospitals couldn't be fetched");
+                    //_logger.Warning("List of Hospitals couldn't be fetched");
                 }
-                _logger.Information($"List of Banks Successfully fetched from Bank.Data Layer and sent to Bank Controller");
+                //_logger.Information($"List of Banks Successfully fetched from Bank.Data Layer and sent to Bank Controller");
                 return res;
 
             }
             catch (Exception ex)
             {
-                _logger.Error("Something went wrong while fetching List of Banks in the Bank.Service");
+                //_logger.Error("Something went wrong while fetching List of Banks in the Bank.Service");
                 throw;
             }
             

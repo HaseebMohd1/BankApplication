@@ -30,9 +30,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bank.Data\Bank.Data.csproj" />
+    <ProjectReference Include="..\Bank.Infrastructure\Bank.Infrastructure.csproj" />
     <ProjectReference Include="..\Bank.Models\Bank.Models.csproj" />
     <ProjectReference Include="..\Bank.Service\Bank.Service.csproj" />
     <ProjectReference Include="..\ExceptionHandler\ExceptionHandler.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
 
 </Project>

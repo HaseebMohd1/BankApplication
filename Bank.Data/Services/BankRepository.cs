@@ -1,6 +1,6 @@
 ﻿using Bank.Data.Contracts;
-using Bank.LoggerService;
 using Bank.Models;
+using SerilogTimings;
 using WebApplication1.Models.AppDbContext;
 
 namespace Bank.Data.Services
@@ -8,12 +8,11 @@ namespace Bank.Data.Services
     public class BankRepository : IBankRepository
     {
         private readonly EmployeeDbContext _employeeDbContext;
-        private readonly ILog _logger;
 
-        public BankRepository(EmployeeDbContext employeeDbContext, ILog logger)
+        public BankRepository(EmployeeDbContext employeeDbContext)
         {
             _employeeDbContext = employeeDbContext;
-            _logger = logger;
+            
         }
 
         
@@ -22,13 +21,13 @@ namespace Bank.Data.Services
         {
             try
             {
-                _logger.Information("Inside the BankRepository to fetch List of all Banks from `BankDetails` Table");
+                //_logger.Information("Inside the BankRepository to fetch List of all Banks from `BankDetails` Table");
                 List<BankDetail> bankDetails = _employeeDbContext.BankDetails.ToList();
                 return bankDetails;
             }
             catch (Exception ex)
             {
-                _logger.Error("Error while fetching the list of all Banks form Database in the Data Layers(Repository)");
+                //_logger.Error("Error while fetching the list of all Banks form Database in the Data Layers(Repository)");
                 throw;
             }
             
@@ -48,7 +47,12 @@ namespace Bank.Data.Services
                     CreatedOn = DateTime.Now
                 };
 
-                var newCreatedBank = _employeeDbContext.BankDetails.Add(newBank);
+                using (Operation.Time("Writing Bank Details in the Data Base"))
+                {
+                    var newCreatedBank = _employeeDbContext.BankDetails.Add(newBank);
+                }
+
+                    
 
                 _employeeDbContext.SaveChanges();
 

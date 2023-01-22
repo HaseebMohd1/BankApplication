@@ -1,4 +1,3 @@
-C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\bin\Debug\net6.0\LoggerService\nlog.config
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\bin\Debug\net6.0\Bank.Infrastructure.deps.json
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\bin\Debug\net6.0\Bank.Infrastructure.dll
 C:\Users\haseeb.m\source\repos\WebApplication1\Bank.Infrastructure\bin\Debug\net6.0\Bank.Infrastructure.pdb

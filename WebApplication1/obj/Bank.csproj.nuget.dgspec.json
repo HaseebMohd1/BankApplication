@@ -130,21 +130,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "NLog": {
+            "Serilog.AspNetCore": {
               "target": "Package",
-              "version": "[5.1.1, )"
+              "version": "[6.1.0, )"
             },
-            "NLog.Appsettings.Standard": {
+            "SerilogTimings": {
               "target": "Package",
-              "version": "[2.1.0, )"
-            },
-            "NLog.Extensions.Logging": {
-              "target": "Package",
-              "version": "[5.2.1, )"
-            },
-            "NLog.Web.AspNetCore": {
-              "target": "Package",
-              "version": "[5.2.1, )"
+              "version": "[3.0.1, )"
             }
           },
           "imports": [
@@ -383,6 +375,9 @@
             "projectReferences": {
               "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Data\\Bank.Data.csproj": {
                 "projectPath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Data\\Bank.Data.csproj"
+              },
+              "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Infrastructure\\Bank.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Infrastructure\\Bank.Infrastructure.csproj"
               },
               "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Models\\Bank.Models.csproj": {
                 "projectPath": "C:\\Users\\haseeb.m\\source\\repos\\WebApplication1\\Bank.Models\\Bank.Models.csproj"
