@@ -1,4 +1,5 @@
 ﻿using Bank.Models;
+using Microsoft.Extensions.Logging;
 using WebApplication1.Models.AppDbContext;
 
 namespace WebApplication1.Repository
@@ -6,10 +7,12 @@ namespace WebApplication1.Repository
     public class Repository : IRepository
     {
         private readonly EmployeeDbContext _dbContext;
+        private readonly ILogger<Repository> _logger;
 
-        public Repository(EmployeeDbContext dbContext)
+        public Repository(EmployeeDbContext dbContext, ILogger<Repository> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
 
 
@@ -57,19 +60,30 @@ namespace WebApplication1.Repository
         }
 
 
+
+        /// <summary>
+        ///     This method returns Transaction Details based on given User Id
+        /// </summary>
+        /// <param name="userId"> User Id </param>
+        /// <returns> List of type Transaction.cs </returns>
+        /// <exception cref="Exception"></exception>
         public List<Transaction> GetTransactionDetailsByUserId(int userId)
         {
             try
             {
+                _logger.LogInformation("Repository : Inside Repository to fetch Transaction Details of User Id {userId}", userId);
+
                 var userTransactions = _dbContext.Transactions.Where(t => t.SenderUserId == userId || t.ReceiverUserId == userId).ToList();
+
+                _logger.LogInformation("Repository : Successfully retrieved Transaction Details of User Id {userId} from Transaction Table and returned...", userId);
 
                 return userTransactions;
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Repository : Error while fetching User Transaction Details. Exception raised!!!");
                 throw new Exception("Error while fetching User Transaction Details!");
             }
-
         }
 
         public bool IsValidUser(int userId)

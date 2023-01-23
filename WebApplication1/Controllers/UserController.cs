@@ -10,6 +10,9 @@ using Bank.Service.Contracts;
 
 namespace WebApplication1.Controllers
 {
+    /// <summary>
+    ///     
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -21,32 +24,47 @@ namespace WebApplication1.Controllers
 
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IBankService _bankService;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(ITransactionService transactionService, IUserService userService, IHttpContextAccessor httpContextAccessor, IBankService bankService)
+        public UserController(ITransactionService transactionService, IUserService userService, IHttpContextAccessor httpContextAccessor, IBankService bankService, ILogger<UserController> logger)
         {
             _transactionService = transactionService;
             _userService = userService;
             _httpContextAccessor = httpContextAccessor;
             _bankService = bankService;
+            _logger = logger;
         }
 
 
-
+        /// <summary>
+        ///     <GET> Method : Returns the Transaction History of Logged in User
+        ///     The User ID can be either in SenderId or ReceiverId
+        /// </summary>
+        /// <returns> List of All Transactions of that particular User </returns>
         [HttpGet("transactions"), Authorize(Roles = "user")]
         public List<Transaction> GetTransactionHistory()
         {
             var loggedInUserEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
+            _logger.LogInformation("Inside the GetTransactionHistory() controller by User => {UserEmail}" ,loggedInUserEmail);
+
             var loggedInUserId = _userService.GetUserIdByEmail(loggedInUserEmail);
+            _logger.LogInformation("UserController : Retrieved User Id of {UserEmail}", loggedInUserEmail);
 
             var res = _transactionService.GetTransactionHistoryByUserId(loggedInUserId);
+
+            _logger.LogInformation("GetTransactionHistory() Contoller ends here successfully => By User {UserEmail} ", loggedInUserEmail);
 
             return res;
         }
 
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amount">  </param>
+        /// <returns>  </returns>
         [HttpPost("withdrawal"), Authorize(Roles = "user")]
         public string WithdrawAmount([FromBody] int amount)
         {
@@ -64,7 +82,11 @@ namespace WebApplication1.Controllers
 
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userDepositDetails"></param>
+        /// <returns></returns>
         [HttpPost("deposit"), Authorize(Roles ="user")]
         public async  Task<ActionResult<string>> DepositAmountByUser([FromBody] UserDeposit userDepositDetails)
         {
