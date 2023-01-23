@@ -21,7 +21,7 @@ namespace WebApplication1.Services
         public Task<UserDto> UpdateUser(UserUpdate userRegisterDetails, string employeeEmail);
 
 
-        public Task<Transaction> PerformTransaction(int id, Transaction transaction, string employeeEmail);
+        public Task<Transaction> PerformTransaction(int id, TransactionModel transaction, string employeeEmail);
 
         public Task<Transaction> RevertTransaction(int id, string employeeEmail);
 

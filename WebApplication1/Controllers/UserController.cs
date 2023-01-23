@@ -32,14 +32,10 @@ namespace WebApplication1.Controllers
 
 
 
-        //[HttpGet("transactions/{userId:int}"), Authorize(Roles ="user")]
-        //public List<Transaction> GetTransactionHistory(int userId)
         [HttpGet("transactions"), Authorize(Roles = "user")]
         public List<Transaction> GetTransactionHistory()
         {
-            //var temp = User?.Identity.Name;
-
-            var loggedInUserEmail =_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+            var loggedInUserEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
             var loggedInUserId = _userService.GetUserIdByEmail(loggedInUserEmail);
 
@@ -47,9 +43,6 @@ namespace WebApplication1.Controllers
 
             return res;
         }
-
-
-
 
 
 
@@ -108,25 +101,12 @@ namespace WebApplication1.Controllers
 
 
 
-
-        //[HttpPost("transfertest"), Authorize(Roles = "user")]
-        //public Task<Transaction> TransferAmountTest(UserTransfer userTransferDetails)
-        //{
-        //    var response = _userService.TransferAmount(userTransferDetails);
-            
-        //    return response;
-        //}
-
-
-
-
-
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserLogin userLoginDetails)
+        public async Task<ActionResult<string>> Login(LoginModel userLoginDetails)
         {
             
-            string userEmail = userLoginDetails.userEmail;
-            string userPassword = userLoginDetails.userPassword;
+            string userEmail = userLoginDetails.Email;
+            string userPassword = userLoginDetails.Password;
 
             var res = _userService.UserLogin(userEmail, userPassword);
 

@@ -33,18 +33,7 @@ namespace Bank.Controllers
         public async Task<ActionResult<List<BankDetail>>> GetAllBanks()
         {
             var res = _bankService.GetBanks();
-
-
-
-            //_logger.Information("Information is logged after creating  Infra Service");
-            //_logger.Warning("Warning is logged after creating  Infra Service");
-            //_logger.Debug("Debug log is logged after creating  Infra Service");
-            //_logger.Error("Error is logged after creating  Infra Service");
-
-            //_logger.Information("GET Request : To get all banks. Inside GetAllBanks() Controller");
-
             
-
             return Ok(res);
         }
 
@@ -58,8 +47,6 @@ namespace Bank.Controllers
             string bankCodeToBeCreated = createBankDetails.BankCode;
 
             _logger.LogInformation("POST Request to Create a New Bank {BankCode} by {EmployeeName}", bankCodeToBeCreated, employeeEmail );
-
-            //_logger.Information($"POST Request : Create a new Bank by {employeeEmail}");
 
             Console.WriteLine(employeeEmail);
 

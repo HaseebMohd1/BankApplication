@@ -396,12 +396,20 @@ namespace WebApplication1.Services
 
 
 
-        public Task<Transaction> PerformTransaction(int id, Transaction transaction, string employeeEmail)
+        public Task<Transaction> PerformTransaction(int id, TransactionModel transaction, string employeeEmail)
         {
 
-            transaction.CreatedBy = employeeEmail;
+            Transaction newTransaction = new Transaction()
+            {
+                SenderUserId = transaction.SenderUserId,
+                ReceiverUserId = transaction.ReceiverUserId,
+                Amount = transaction.Amount,
+                TransactionMethod = transaction.TransactionMethod,
+            };
 
-            var res = _employeeRepository.performTransaction(id, transaction);
+            newTransaction.CreatedBy = employeeEmail;
+
+            var res = _employeeRepository.performTransaction(id, newTransaction);
 
             return res;
         }

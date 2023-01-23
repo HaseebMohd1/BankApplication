@@ -136,16 +136,6 @@ namespace WebApplication1.Services
 
 
 
-        //public Task<Transaction> TransferAmount(Transaction transaction)
-        //{
-
-        //    var userId = transaction.SenderUserId;
-
-        //    var res =  _employeeRepository.performTransaction(userId, transaction);
-
-
-        //    return res;
-        //}
 
         public Task<Transaction> TransferAmount(UserTransfer transaction)
         {
@@ -165,7 +155,6 @@ namespace WebApplication1.Services
 
             var res = _employeeRepository.performTransaction(userId, newTransaction);
 
-
             return res;
         }
 
@@ -179,16 +168,8 @@ namespace WebApplication1.Services
                 throw new Exception("User with Email doesn't exists!!! Please enter valid/existing User Email");
             }
 
-
-            // string hashedPassword = _userRepository.GetHashedPassword(userEmail);
-
             string hashedPassword = userDetails.UserPassword;
             string passwordSalt = userDetails.PasswordSalt;
-
-            //if(!VerifyPassword(userPassword, hashedPassword, passwordSalt))
-            //{
-            //    throw new Exception("Entered Details are Incorrect. Please Enter valid Email & Password");
-            //}
 
             if (!VerifyPasswordSha256(userPassword, hashedPassword, passwordSalt))
             {
@@ -301,8 +282,6 @@ namespace WebApplication1.Services
 
         public bool ResetPassword(string userEmail, UserResetPassword userResetPassword)
         {
-
-            //User userDetails = _repository.GetUserByEmail(userEmail) ?? new User();
             User userDetails = _repository.GetUserByEmail(userEmail);
             if (userDetails == null)
             {
@@ -317,15 +296,10 @@ namespace WebApplication1.Services
                 throw new Exception("Entered Details are Incorrect. Please Enter valid Email & Password");
             }
 
-
-
-            
-
             // Password Hashing using SHA256
             string newRandomSalt = GenerateRandomSalt();
 
             string newHashedPassword = CreatePasswordHashUsingSha256(userResetPassword.NewPassword + newRandomSalt);
-
 
             userDetails.UserPassword = newHashedPassword;
             userDetails.PasswordSalt = newRandomSalt;

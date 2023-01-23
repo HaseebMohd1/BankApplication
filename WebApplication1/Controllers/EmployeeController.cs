@@ -14,16 +14,6 @@ namespace WebApplication1.Controllers
     [Route("api/[controller]")]
     public class EmployeeController : ControllerBase
     {
-
-        //private readonly  EmployeeDbContext _dbContext;
-
-        // EmployeeDbContext db = new EmployeeDbContext();
-
-        //public EmployeeController(EmployeeDbContext dbcontext)
-        //{
-        //    _dbContext = dbcontext;
-        //}
-
         private IEmployeeRepository employeeRepository;
 
         private readonly IEmployeeService _employeeService;
@@ -42,13 +32,6 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public Task<List<UserDto>> GetAllUsers()
         {
-
-            
-
-            //var response = await _dbContext.Employees.ToList();
-
-            //var response = employeeRepository.GetUsers();
-
             var response = _employeeService.GetUsers();
 
             return response;
@@ -60,8 +43,6 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public UserDto GetUserById(int id)
         {
-            //var userDetails = employeeRepository.GetUserById(id);
-
             var userDetails2 = _employeeService.GetUserById(id);
 
             return userDetails2;
@@ -69,37 +50,6 @@ namespace WebApplication1.Controllers
 
 
 
-        //[HttpPost("createUser"), Authorize(Roles = "Admin,SuperAdmin")]
-        //public async Task<ActionResult<string>> CreateUser(User user)
-        //{
-        //    // int res = await employeeRepository.CreateUser(user);
-
-        //    string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
-
-        //    user.CreatedBy = employeeEmail;
-        //    user.CreatedOn = DateTime.UtcNow;
-
-        //    bool bankExists = _employeeService.ValidateBank(user.BankCode);
-
-        //    if (!bankExists)
-        //    {
-        //        return BadRequest("This Bank doesn't exits. Please enter valid Bank Code");
-        //    }
-
-        //    UserDto newUserDetails = _employeeService.CreateUser(user);
-
-        //    //if (res == 0)
-        //    //{
-        //    //    return null;
-        //    //}
-
-        //    string successMessage = $"Name : {newUserDetails.UserName}\n\tEmail : {newUserDetails.UserEmail}\n\tAccount Number : {newUserDetails.AccountNumber}";
-
-        //    return Ok($"User Succesfully Created : -> \n\t {successMessage}");
-
-        //  // return user;
-
-        //}
 
         [HttpPost("createUser"), Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<ActionResult<string>> CreateUserNew(UserCreate userCreateDetails)
@@ -126,18 +76,13 @@ namespace WebApplication1.Controllers
 
 
 
-        // Test - User Update
+    
         [HttpPut("updateUser"), Authorize(Roles = "Admin,SuperAdmin")]
         public async  Task<ActionResult<UserDto>> UpdateUserTest(UserUpdate userUpdateDetails)
         {
-
-
-            string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
-
-
+            string employeeEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
             var res = await _employeeService.UpdateUser(userUpdateDetails, employeeEmail);
-
 
             if (res == null)
             {
@@ -152,27 +97,22 @@ namespace WebApplication1.Controllers
 
         [Route("transaction"), Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPost]
-        public async Task<Transaction> PerformTransaction([FromBody] Transaction transaction)
+        public async Task<Transaction> PerformTransaction([FromBody] TransactionModel transaction)
         {
             int id = transaction.SenderUserId;
-            //var res = await employeeRepository.performTransaction(id, transaction);
 
-            string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+            string employeeEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
             var res2 = await _employeeService.PerformTransaction(id, transaction, employeeEmail);
+
             return res2;
         }
-
-
-
 
         [Route("revert/{transactionId:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         [HttpGet]
         public async Task<Transaction> RevertTransaction(int transactionId)
         {
-
-            string employeeEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
-            //Transaction revertedTransaction = await employeeRepository.RevertTransaction(transactionId);
+            string employeeEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
             Transaction revertedTransaction = await _employeeService.RevertTransaction(transactionId, employeeEmail);
 
@@ -192,6 +132,7 @@ namespace WebApplication1.Controllers
         public async Task<List<Transaction>> GetUserTransactionDetails(int userId)
         {
             var res = employeeRepository.GetTransactionDetailsByUserId(userId);
+
             return res;
         }
 
@@ -202,6 +143,7 @@ namespace WebApplication1.Controllers
         public async Task<string> DeleteUser(int userId)
         {
             var res = employeeRepository?.DeleteUserById(userId);
+
             return res;
         }
 
@@ -209,8 +151,11 @@ namespace WebApplication1.Controllers
 
 
         [HttpPost("/login")]
-        public async Task<ActionResult<string>> EmployeeLogin(string employeeEmail, string password)
+        public async Task<ActionResult<string>> EmployeeLogin(LoginModel loginDetails)
         {
+            string employeeEmail = loginDetails.Email;
+            string password = loginDetails.Password;
+
             string res =  _employeeService.EmployeeLogin(employeeEmail, password);
 
             if(res == null || res == string.Empty)
@@ -223,10 +168,17 @@ namespace WebApplication1.Controllers
 
 
 
-
+        // <summary>
+        // This end point creates a New Employee
+        // This can be accessed only by Employess with Role='SuperAdmin'    
+        // </summary>
         [HttpPost("/registerEmployee"), Authorize(Roles ="SuperAdmin")]
-        public async Task<ActionResult<string>> RegisterEmployee(string empName, string empEmail, string empPassword)
+        public async Task<ActionResult<string>> RegisterEmployee(RegisterEmployeeModel employeeDetails)
         {
+            string empName = employeeDetails.EmployeeName;
+            string empEmail = employeeDetails.EmployeeEmail;
+            string empPassword = employeeDetails.EmployeePassword;
+
             var res = _employeeService.CreateEmployee(empName, empEmail, empPassword);
 
             if (res == string.Empty)
