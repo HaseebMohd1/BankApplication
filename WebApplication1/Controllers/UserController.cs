@@ -6,6 +6,7 @@ using Microsoft.Extensions.Primitives;
 using WebApplication1.Services;
 using Bank.Data.DTO;
 using Bank.Models.ViewModel;
+using Bank.Service.Contracts;
 
 namespace WebApplication1.Controllers
 {
@@ -17,14 +18,16 @@ namespace WebApplication1.Controllers
 
         private IUserService _userService;
 
+
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IBankService _bankService;
 
-
-        public UserController(ITransactionService transactionService, IUserService userService, IHttpContextAccessor httpContextAccessor)
+        public UserController(ITransactionService transactionService, IUserService userService, IHttpContextAccessor httpContextAccessor, IBankService bankService)
         {
             _transactionService = transactionService;
             _userService = userService;
             _httpContextAccessor = httpContextAccessor;
+            _bankService = bankService;
         }
 
 
@@ -70,11 +73,16 @@ namespace WebApplication1.Controllers
 
 
         [HttpPost("deposit"), Authorize(Roles ="user")]
-        public  string DepositAmountByUser([FromBody] UserDeposit userDepositDetails)
+        public async  Task<ActionResult<string>> DepositAmountByUser([FromBody] UserDeposit userDepositDetails)
         {
 
             int amount = userDepositDetails.Amount;
             string currency = userDepositDetails?.Currency;
+
+            if ( !_bankService.isValidCurrency(currency))
+            {
+                return BadRequest("Please enter Valid Currency Code");
+            }
 
             var loggedInUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
@@ -84,7 +92,7 @@ namespace WebApplication1.Controllers
             
 
 
-            return response;
+            return Ok(response);
         }
 
 

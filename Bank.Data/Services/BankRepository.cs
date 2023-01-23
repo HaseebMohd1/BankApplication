@@ -63,5 +63,13 @@ namespace Bank.Data.Services
                 throw new Exception("Error : Couldn't create a New Bank");
             }
         }
+
+
+        public Currency GetCurrencyDetails(string currencyCode)
+        {
+            Currency currencyDetail = _employeeDbContext.Currencies.Where(c => c.CurrencyCode == currencyCode).FirstOrDefault();
+
+            return currencyDetail;
+        }
     }
 }

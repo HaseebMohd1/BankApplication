@@ -58,5 +58,26 @@ namespace Bank.Service.Services
             return newBankDetails;
 
         }
+
+        public bool isValidCurrency(string currencyCode)
+        {
+            try
+            {
+                Currency currencyDetails = _bankRepository.GetCurrencyDetails(currencyCode);
+                if(currencyDetails == null)
+                {
+                    return false;
+                }
+
+                return true;
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return false;
+        }
     }
 }

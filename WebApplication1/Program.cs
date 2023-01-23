@@ -16,12 +16,16 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 using Serilog.Events;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.ApplicationInsights;
+using Serilog.Sinks.ApplicationInsights.TelemetryConverters;
 
 // Adding Logging even before the Start of the Application
 Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .Enrich.FromLogContext()
             .WriteTo.Console()
+            
             .CreateBootstrapLogger();
 
 try
@@ -30,12 +34,16 @@ try
 
     var builder = WebApplication.CreateBuilder(args);
 
+    builder.Services.AddApplicationInsightsTelemetry();
+
+
 
     // setting up Serilog for our application
     // This is for reading the Configuration and Enabling Serilog
     builder.Host.UseSerilog((context, services, configuration) => configuration
             .ReadFrom.Configuration(context.Configuration)
             .ReadFrom.Services(services)
+            .WriteTo.ApplicationInsights(services.GetRequiredService<TelemetryClient>(), new TraceTelemetryConverter())
             .Enrich.FromLogContext()
     );
 

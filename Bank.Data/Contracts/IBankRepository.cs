@@ -11,5 +11,6 @@ namespace Bank.Data.Contracts
     {
         BankDetail CreateBank(string bankCode, string bankName, string employeeName);
         public List<BankDetail> GetBankDetails();
+        Currency GetCurrencyDetails(string currencyCode);
     }
 }
