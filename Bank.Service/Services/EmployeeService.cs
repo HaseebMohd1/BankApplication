@@ -4,13 +4,12 @@ using AutoMapper;
 using Bank.Models;
 using WebApplication1.DTO;
 using WebApplication1.Repository;
-using BCrypt.Net;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Bank.Models.ViewModel;
-using Microsoft.EntityFrameworkCore;
+using ExceptionHandler.Exceptions;
 
 namespace WebApplication1.Services
 {
@@ -23,8 +22,12 @@ namespace WebApplication1.Services
         private readonly IConfiguration _configuration;
 
 
-
-        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper, IRepository repository, IConfiguration configuration)
+        public EmployeeService(
+            IEmployeeRepository employeeRepository, 
+            IMapper mapper, 
+            IRepository repository, 
+            IConfiguration configuration
+            )
         {
             _employeeRepository = employeeRepository;
             _mapper = mapper;
@@ -43,25 +46,38 @@ namespace WebApplication1.Services
 
         public UserDto GetUserById(int userId)
         {
-            try
+            if (!this.isUserActive(userId))
             {
-                if (!this.isUserActive(userId))
-                {
-                    throw new Exception("User Doesn't Exits!!!");
-                }
-
-
-                var userDetails = _employeeRepository.GetUserDetails(userId);
-
-                var response = _mapper.Map<UserDto>(userDetails);
-
-                return response;
-
+                throw new NotFoundException("User Doesn't Exits!!!");
+                //throw new Exception("User Doesn't Exits!!!");
             }
-            catch
-            {
-                throw new Exception("Error : Couldn't GET user details by given ID");
-            }
+
+
+            var userDetails = _employeeRepository.GetUserDetails(userId);
+
+            var response = _mapper.Map<UserDto>(userDetails);
+
+            return response;
+            //try
+            //{
+            //    if (!this.isUserActive(userId))
+            //    {
+            //        throw new NotFoundException("User Doesn't Exits!!!");
+            //        //throw new Exception("User Doesn't Exits!!!");
+            //    }
+
+
+            //    var userDetails = _employeeRepository.GetUserDetails(userId);
+
+            //    var response = _mapper.Map<UserDto>(userDetails);
+
+            //    return response;
+
+            //}
+            //catch
+            //{
+            //    throw new Exception("Error : Couldn't GET user details by given ID");
+            //}
         }
 
 

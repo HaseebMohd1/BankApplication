@@ -3626,7 +3626,8 @@
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
           "Bank.Data": "1.0.0",
-          "Bank.Infrastructure": "1.0.0"
+          "Bank.Infrastructure": "1.0.0",
+          "ExceptionHandler": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Bank.Service.dll": {}

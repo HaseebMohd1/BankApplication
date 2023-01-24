@@ -14,15 +14,19 @@ namespace WebApplication1.Controllers
     [Route("api/[controller]")]
     public class EmployeeController : ControllerBase
     {
-        private IEmployeeRepository employeeRepository;
+        private IEmployeeRepository _employeeRepository;
 
         private readonly IEmployeeService _employeeService;
 
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, IEmployeeService employeeService, IHttpContextAccessor httpContextAccessor)
+        public EmployeeController(
+            IEmployeeRepository employeeRepository, 
+            IEmployeeService employeeService, 
+            IHttpContextAccessor httpContextAccessor
+            )
         {
-            this.employeeRepository = employeeRepository;
+            _employeeRepository = employeeRepository;
             _employeeService = employeeService;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -30,11 +34,12 @@ namespace WebApplication1.Controllers
 
         [Route("users"), Authorize(Roles ="Admin,SuperAdmin")]
         [HttpGet]
-        public Task<List<UserDto>> GetAllUsers()
+        public async Task<IActionResult> GetAllUsers()
         {
             var response = _employeeService.GetUsers();
 
-            return response;
+
+            return Ok(response);
         }
 
 
@@ -131,7 +136,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<List<Transaction>> GetUserTransactionDetails(int userId)
         {
-            var res = employeeRepository.GetTransactionDetailsByUserId(userId);
+            var res = _employeeRepository.GetTransactionDetailsByUserId(userId);
 
             return res;
         }
@@ -142,7 +147,7 @@ namespace WebApplication1.Controllers
         [HttpPut("user/delete/{userId:int}"), Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<string> DeleteUser(int userId)
         {
-            var res = employeeRepository?.DeleteUserById(userId);
+            var res = _employeeRepository?.DeleteUserById(userId);
 
             return res;
         }

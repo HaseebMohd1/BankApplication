@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Bank.Data\Bank.Data.csproj" />
     <ProjectReference Include="..\Bank.Infrastructure\Bank.Infrastructure.csproj" />
+    <ProjectReference Include="..\ExceptionHandler\ExceptionHandler.csproj" />
   </ItemGroup>
 
 </Project>
