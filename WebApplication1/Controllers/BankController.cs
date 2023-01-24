@@ -28,22 +28,27 @@ namespace Bank.Controllers
 
             //_logger.LogInformation("Inside the Bank Controller");
         }
+        
 
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<List<BankDetail>>> GetAllBanks()
+        public async Task<IActionResult> GetAllBanks()
         {
             var res = _bankService.GetBanks();
             
             return Ok(res);
         }
 
+
+
         [HttpPost, Authorize(Roles = "SuperAdmin")]
-        public async Task<ActionResult<string>> CreateBank([FromBody] CreateBank createBankDetails)
+        public async Task<IActionResult> CreateBank([FromBody] CreateBank createBankDetails)
         {
-
-           
-
             string employeeEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
             string bankCodeToBeCreated = createBankDetails.BankCode;
 
             _logger.LogInformation("POST Request to Create a New Bank {BankCode} by {EmployeeName}", bankCodeToBeCreated, employeeEmail );
@@ -51,8 +56,6 @@ namespace Bank.Controllers
             Console.WriteLine(employeeEmail);
 
             bool isBankAlreadyExists = _employeeService.ValidateBank(createBankDetails.BankCode);
-
-            
 
             if(isBankAlreadyExists)
             {
@@ -65,8 +68,6 @@ namespace Bank.Controllers
             //_logger.Information($"Successfully Created a Bank with Code : {bankCodeToBeCreated} and created by {employeeEmail}");
 
             return Ok(res);
-        }
-
-       
+        } 
     }
 }

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 using Microsoft.AspNetCore.Http;
 
-namespace ExceptionHandler
-{
+namespace ExceptionHandler;
+
+    /// <summary>
+    ///     This is a Custom Middleware to handle Errors Globally for all Exceptions at any project
+    /// </summary>
     public class ExceptionHandlingMiddleware : IMiddleware
     {
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -23,4 +21,4 @@ namespace ExceptionHandler
             }
         }
     }
-}
+

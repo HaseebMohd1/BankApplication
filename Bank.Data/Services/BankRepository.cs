@@ -64,7 +64,7 @@ namespace Bank.Data.Services
             }
         }
 
-
+        
         public Currency GetCurrencyDetails(string currencyCode)
         {
             Currency currencyDetail = _employeeDbContext.Currencies.Where(c => c.CurrencyCode == currencyCode).FirstOrDefault();
@@ -73,3 +73,4 @@ namespace Bank.Data.Services
         }
     }
 }
+

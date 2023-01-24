@@ -15,8 +15,6 @@ using ExceptionHandler;
 using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 using Serilog.Events;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights;
 using Serilog.Sinks.ApplicationInsights.TelemetryConverters;
 
@@ -97,7 +95,7 @@ try
     // Repository
     builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
     builder.Services.AddScoped<IRepository, Repository>();
-    builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+    builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();    
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<IBankRepository, BankRepository>();
 
@@ -145,8 +143,8 @@ try
     });
 
 
-    // adding custom middleware for Exception Handling
-    app.UseMiddleware<ExceptionHandlingMiddleware>();
+    // adding custom middleware for Exception Handling - 1
+    //app.UseMiddleware<ExceptionHandlingMiddleware>();
 
     app.UseAuthentication();
 
@@ -163,6 +161,9 @@ try
     {
         diagnosticContext.Set("UserId", "Someone");
     });
+
+    // Custom Middleware - 2
+    app.AddGlobalErrorHandler();
 
     app.Run();
 }
