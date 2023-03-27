@@ -482,3 +482,7 @@ $RECYCLE.BIN/
 /Logs
 WebApplication1\Logs
 WebApplication1/Logs
+
+*.vs
+
+*\obj
