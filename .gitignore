@@ -477,3 +477,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Logs
+/Logs
+WebApplication1\Logs
+WebApplication1/Logs
